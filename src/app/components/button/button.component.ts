@@ -8,4 +8,5 @@ import {Component, Input} from '@angular/core';
   styleUrl: './button.component.css'
 })
 export class ButtonComponent {
+  text="Button";
 }

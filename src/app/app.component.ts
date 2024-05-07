@@ -11,4 +11,5 @@ import {ButtonComponent} from "./components/button/button.component";
 })
 export class AppComponent {
   title = 'MindBlow-application';
+  text="Button";
 }
