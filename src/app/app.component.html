@@ -1,1 +1,16 @@
-<app-button class="LargeButton ButtonFilled"> dsad</app-button>
+
+<style>
+    div{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+</style>
+
+
+<div >
+<app-button  [type]=CssButton.Filled    [size]=CssButton.Large buttonText="Button"></app-button>
+<app-button  [type]=CssButton.Text      [size]=CssButton.Small buttonText="Button"></app-button>
+<app-button  [type]=CssButton.OutLine   [size]=CssButton.Big   buttonText="Button"></app-button>
+<app-button  [type]=CssButton.Filled    [size]=CssButton.Small buttonText="Button"></app-button>
+</div>
