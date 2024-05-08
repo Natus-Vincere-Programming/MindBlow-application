@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --accent: #5356FF;
+    --accent-0: #000000;
+    --accent-10: #000133;
+    --accent-20: #000266;
+    --accent-30: #000399;
+    --accent-40: #0004CC;
+    --accent-50: #0004FF;
+    --accent-60: #3337FF;
+    --accent-70: #6669FF;
+    --accent-80: #999BFF;
+    --accent-90: #CCCDFF;
+    --accent-95: #E5E6FF;
+    --accent-99: #FAFAFF;
+    --accent-100: #FFFFFF;
+
+    --neutral: #000000;
+    --neutral-10: #1A1A1A;
+    --neutral-20: #333333;
+    --neutral-30: #4D4D4D;
+    --neutral-40: #666666;
+    --neutral-50: #808080;
+    --neutral-60: #999999;
+    --neutral-70: #B3B3B3;
+    --neutral-80: #CCCCCC;
+    --neutral-90: #E6E6E6;
+    --neutral-95: #F2F2F2;
+    --neutral-100: #FFFFFF;
+}
