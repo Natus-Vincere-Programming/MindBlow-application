@@ -87,4 +87,16 @@
     --information-95: #E5F0FF;
     --information-99: #FAFCFF;
     --information-100: #FFFFFF;
+
+    --font: Inter;
+    --size-heading-1: 48px;
+    --size-heading-2: 40px;
+    --size-heading-3: 33px;
+    --size-heading-4: 28px;
+    --size-heading-5: 23px;
+    --size-heading-6: 19px;
+
+    --size-paragraph: 16px;
+    --size-small: 13px;
+    --size-macro: 9px;
 }
