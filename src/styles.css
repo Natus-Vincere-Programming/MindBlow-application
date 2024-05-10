@@ -27,4 +27,76 @@
     --neutral-90: #E6E6E6;
     --neutral-95: #F2F2F2;
     --neutral-100: #FFFFFF;
+
+    --warning: #FFA653;
+    --warning-0: #000000;
+    --warning-10: #331800;
+    --warning-20: #663100;
+    --warning-30: #994900;
+    --warning-40: #CC6200;
+    --warning-50: #FF7A00;
+    --warning-60: #FF9533;
+    --warning-70: #FFAF66;
+    --warning-80: #FFCA99;
+    --warning-90: #FFE4CC;
+    --warning-95: #FFF2E5;
+    --warning-99: #FFFCFA;
+    --warning-100: #FFFFFF;
+
+    --error: #FF5454;
+    --error-0: #000000;
+    --error-10: #330000;
+    --error-20: #660000;
+    --error-30: #990000;
+    --error-40: #CC0000;
+    --error-50: #FF0000;
+    --error-60: #FF3333;
+    --error-70: #FF6666;
+    --error-80: #FF9999;
+    --error-90: #FFCCCC;
+    --error-95: #FFE5E5;
+    --error-99: #FFFAFA;
+    --error-100: #FFFFFF;
+
+    --success: #54FF84;
+    --success-0: #000000;
+    --success-10: #00330E;
+    --success-20: #00661D;
+    --success-30: #00992B;
+    --success-40: #00CC39;
+    --success-50: #00FF47;
+    --success-60: #33FF6C;
+    --success-70: #66FF91;
+    --success-80: #99FFB6;
+    --success-90: #CCFFDA;
+    --success-95: #E5FFED;
+    --success-99: #FAFFFB;
+    --success-100: #FFFFFF;
+
+    --information: #5498FF;
+    --information-0: #000000;
+    --information-10: #001433;
+    --information-20: #002966;
+    --information-30: #003D99;
+    --information-40: #0052CC;
+    --information-50: #0066FF;
+    --information-60: #3385FF;
+    --information-70: #66A3FF;
+    --information-80: #99C2FF;
+    --information-90: #CCE0FF;
+    --information-95: #E5F0FF;
+    --information-99: #FAFCFF;
+    --information-100: #FFFFFF;
+
+    --font: Inter;
+    --size-heading-1: 48px;
+    --size-heading-2: 40px;
+    --size-heading-3: 33px;
+    --size-heading-4: 28px;
+    --size-heading-5: 23px;
+    --size-heading-6: 19px;
+
+    --size-paragraph: 16px;
+    --size-small: 13px;
+    --size-macro: 9px;
 }
