@@ -1,12 +1,10 @@
 .FieldWarning{
   background: white;
-  border-color: var(--accent);
+  border-color: var(--warning-60);
   border-radius: 16px;
-  border:solid 1.5px var(--accent);
-  color: var(--neutral);
+  border:solid 1px var(--warning-60);
   height: 52px;
   min-width: 260px;
-  transition: width 3s ease-in-out;
   /*background-position: 10px 10px;
   background-repeat: no-repeat;
   padding-left: 40px;
@@ -14,5 +12,6 @@
   */
 }
 .FieldWarning:focus{
-  width: 100%;
+  background-color: var(--neutral-80);
+  border:solid 2px var(--warning-60);
 }
