@@ -1,0 +1,32 @@
+.checkbox {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid #999999;
+    appearance: menulist-button;
+    cursor: pointer;
+}
+
+/*.checkbox:before{*/
+/*    background-color: #5356FF;*/
+/*    border-color: #5356FF;*/
+/*    content:'';*/
+/*}*/
+
+.checkbox:checked {
+    position: absolute;
+    background-color: #5356FF;
+    border-color: #5356FF;
+}
+
+.checkbox:hover {
+    border-color: #808080;
+    animation-duration: 130ms;
+}
+
+.checkbox:checked:hover {
+    border-color: #6669FF;
+    background-color: #6669FF;
+    animation-duration: 130ms;
+}
