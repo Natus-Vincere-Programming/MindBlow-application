@@ -1,17 +1,45 @@
-.FieldWarning{
-  background: white;
-  border-color: var(--warning-60);
-  border-radius: 16px;
-  border:solid 1px var(--warning-60);
-  height: 52px;
-  min-width: 260px;
-  /*background-position: 10px 10px;
-  background-repeat: no-repeat;
-  padding-left: 40px;
-  background-image: url("https://w7.pngwing.com/pngs/473/305/png-transparent-material-font-search-icon-material-circle-hardware-thumbnail.png")
-  */
+.inputGroup {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 1em 0 1em 0;
+    position: relative;
+    border: none;
 }
-.FieldWarning:focus{
-  background-color: var(--neutral-80);
-  border:solid 2px var(--warning-60);
+
+.inputGroup input {
+    font-size: 100%;
+    width: 390px;
+    height: 52px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    outline: none;
+    background-color: transparent;
+    border-radius: 20px;
+    /*width: 100%;*/
+}
+
+.inputGroup label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 29px;
+    padding-bottom: 8px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(100, 100, 100);
+}
+
+.inputGroup :is(input:focus, input:valid)~label {
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    background-color: #e8e8e8;
+}
+
+.inputGroup :is(input:focus, input:valid) {
+    border-color: rgb(150, 150, 200);
 }
