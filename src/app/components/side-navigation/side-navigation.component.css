@@ -1,13 +1,13 @@
 .onBat{
   background-color: var(--accent-95);
-  border: 0px solid black ;
-
+  border: none ;
+  font-size: var(--size-paragraph);
 
 }
 .ofBat{
   background-color: var(--accent-100);
   border: 2px solid var(--accent-95);
-
+  font-size: var(--size-paragraph);
 }
 .norm{
   width: 200px;
