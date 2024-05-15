@@ -1,0 +1,22 @@
+.onBat{
+  background-color: var(--accent-95);
+  border: 0px solid black ;
+
+
+}
+.ofBat{
+  background-color: var(--accent-100);
+  border: 2px solid var(--accent-95);
+
+}
+.norm{
+  width: 200px;
+  height: 50px;
+  border-radius: 16px;
+}
+.small{
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+
+}
