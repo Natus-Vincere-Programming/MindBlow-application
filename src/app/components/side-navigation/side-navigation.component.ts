@@ -11,6 +11,8 @@ export class SideNavigationComponent {
   @Input() buttonText!: string;
   @Input() type: string="";
   @Input() size: string="";
+  @Input() img_icon!: string;
+  @Input() img_icon2!: string;
 
 
 
