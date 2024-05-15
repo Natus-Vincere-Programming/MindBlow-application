@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './checkbox.component.css'
 })
 export class CheckboxComponent {
+  isChecked = false;
 
+  toggleCheckbox() {
+    this.isChecked = !this.isChecked;
+  }
 }

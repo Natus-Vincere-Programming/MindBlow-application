@@ -1,0 +1,75 @@
+.default {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid var(--neutral-60);
+    appearance: none;
+    cursor: pointer;
+}
+.default:checked:before {
+    content: url('../../../assets/icons/Type=Check, Weight=Regular.svg');
+    border-color: var(--accent);
+    display: inline-block;
+    margin: 0.3px;
+    padding: 0.4px;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+}
+.default:checked:hover{
+    border-color: var(--accent);
+    background-color: var(--accent);
+    animation-duration: 130ms;
+}
+.default:checked {
+    position: absolute;
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+.default:hover {
+    border-color: var(--neutral-60);
+    animation-duration: 130ms;
+}
+.default:checked:hover {
+    border-color: var(--accent);
+    background-color: var(--accent);
+    animation-duration: 130ms;
+}
+
+.not-full {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid var(--neutral-60);
+    appearance: none;
+    cursor: pointer;
+}
+.not-full:checked:before{
+    background-color: transparent;
+    border-color: var(--accent);
+    content: url('/src/assets/icons/ButtonRectangle.svg');
+    margin: -1.8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent);
+}
+.not-full:checked:hover{
+    border-color: var(--accent);
+    color: var(--accent);
+    animation-duration: 130ms;
+}
+.not-full:checked {
+    position: absolute;
+    border-color: var(--accent);
+}
+.not-full:hover {
+    border-color: var(--neutral-60);
+    animation-duration: 130ms;
+}
+.not-full:checked:hover {
+    border-color: var(--accent);
+    animation-duration: 130ms;
+}
