@@ -37,29 +37,75 @@
 
 
 /* OUTLINE INPUT TEXT*/
-.inputGroup.OutLine input {
+.inputGroup.outLine input {
     border: 2px solid var(--accent);
 }
 
-.inputGroup.OutLine :is(input:focus, input:valid) {
+.inputGroup.outLine :is(input:focus, input:valid) {
     border: 2px solid var(--accent);
 }
 /* OUTLINE INPUT TEXT*/
 
 
 /* DISABLED INPUT TEXT*/
-.inputGroup.Disabled input {
+.inputGroup.disabled input {
     background: var(--neutral-70);
     cursor: not-allowed;
 }
 
-.inputGroup.Disabled input:disabled {
+.inputGroup.disabled input:disabled {
     pointer-events: none; /* Disable all interactions */
 }
 
-.inputGroup.Disabled :is(input:focus, input:valid)~label {
+.inputGroup.disabled :is(input:focus, input:valid)~label {
     transform: scale(100%);
     padding: 16px;
     background: none;
 }
 /* DISABLED INPUT TEXT*/
+
+
+/* ERROR INPUT TEXT*/
+.inputGroup.error input {
+    border: 2px solid var(--error-60);
+}
+
+.inputGroup.error :is(input:focus, input:valid) {
+    border: 2px solid var(--error-60);
+}
+/* ERROR INPUT TEXT*/
+
+/* WARNING INPUT TEXT*/
+.inputGroup.warning input {
+    border: 2px solid var(--warning-60);
+}
+
+.inputGroup.warning :is(input:focus, input:valid) {
+    border: 2px solid var(--warning-60);
+}
+/* WARNING INPUT TEXT*/
+
+/* GREY INPUT TEXT*/
+.inputGroup.grey input {
+    border: none;
+    background-color: var(--neutral-40);
+}
+
+.inputGroup.grey :is(input:focus, input:valid) {
+    border: none;
+    background-color: var(--neutral-40);
+}
+/* GREY INPUT TEXT*/
+
+
+/* GREYOUTLINE INPUT TEXT*/
+.inputGroup.greyoutline input {
+    border: 2px solid var(--accent);
+    background-color: var(--neutral-60);
+}
+
+.inputGroup.greyoutline :is(input:focus, input:valid) {
+    border: 2px solid var(--accent);
+    background-color: var(--neutral-60);
+}
+/* GREYOUTLINE INPUT TEXT*/
