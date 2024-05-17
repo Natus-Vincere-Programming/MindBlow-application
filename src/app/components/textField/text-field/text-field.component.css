@@ -1,45 +1,65 @@
+/* DEFAULT INPUT TEXT*/
 .inputGroup {
     font-family: 'Segoe UI', sans-serif;
-    margin: 1em 0 1em 0;
+    margin: 1em 0;
     position: relative;
-    border: none;
 }
 
 .inputGroup input {
     font-size: 100%;
     width: 390px;
     height: 52px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding: 14px 15px;
     outline: none;
-    background-color: transparent;
-    border-radius: 20px;
-    /*width: 100%;*/
+    border-radius: 25px;
+    border: none; /* No border by default */
 }
 
 .inputGroup label {
     font-size: 100%;
     position: absolute;
     left: 0;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 29px;
-    padding-bottom: 8px;
+    padding: 29px 15px 8px;
     pointer-events: none;
     transition: all 0.3s ease;
-    color: rgb(100, 100, 100);
 }
 
 .inputGroup :is(input:focus, input:valid)~label {
-    transform: translateY(-50%) scale(.9);
-    margin: 0em;
-    margin-left: 1.3em;
+    transform: translateY(2%) scale(.9);
     padding: 0.4em;
-    background-color: #e8e8e8;
+    background: none;
 }
 
 .inputGroup :is(input:focus, input:valid) {
-    border-color: rgb(150, 150, 200);
+    border: none;
 }
+/* DEFAULT INPUT TEXT*/
+
+
+/* OUTLINE INPUT TEXT*/
+.inputGroup.OutLine input {
+    border: 2px solid var(--accent);
+}
+
+.inputGroup.OutLine :is(input:focus, input:valid) {
+    border: 2px solid var(--accent);
+}
+/* OUTLINE INPUT TEXT*/
+
+
+/* DISABLED INPUT TEXT*/
+.inputGroup.Disabled input {
+    background: var(--neutral-70);
+    cursor: not-allowed;
+}
+
+.inputGroup.Disabled input:disabled {
+    pointer-events: none; /* Disable all interactions */
+}
+
+.inputGroup.Disabled :is(input:focus, input:valid)~label {
+    transform: scale(100%);
+    padding: 16px;
+    background: none;
+}
+/* DISABLED INPUT TEXT*/
