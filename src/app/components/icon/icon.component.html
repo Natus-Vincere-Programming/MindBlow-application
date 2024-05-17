@@ -1,1 +1,6 @@
-<img ngSrc="{{getSource()}}" height="{{getSize()}}" width="{{getSize()}}">
+<div [innerHtml]="getSource()"
+     [style.width.px]="getSize()"
+     [style.height.px]="getSize()"
+     [style.color]="getColor()"
+     class="icon">
+</div>
