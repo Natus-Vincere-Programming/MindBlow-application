@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'); /* You can add global styles to this file, and also import other style files */
+
 :root {
     --accent: #5356FF;
     --accent-0: #000000;
@@ -87,17 +88,59 @@
     --information-95: #E5F0FF;
     --information-99: #FAFCFF;
     --information-100: #FFFFFF;
+}
 
-    --font: Inter;
-    --size-heading-1: 48px;
-    --size-heading-2: 40px;
-    --size-heading-3: 33px;
-    --size-heading-4: 28px;
-    --size-heading-5: 23px;
-    --size-heading-6: 19px;
+.heading-1 {
+    font-family: "Inter Semi Bold", sans-serif;
+    font-size: 48px;
+}
 
-    --size-paragraph: 16px;
-    --size-small: 13px;
-    --size-macro: 9px;
+.heading-2 {
+    font-family: "Inter Semi Bold", sans-serif;
+    font-size: 40px;
+}
 
+.heading-3 {
+    font-family: "Inter Semi Bold", sans-serif;
+    font-size: 33px;
+}
+
+.heading-4 {
+    font-family: "Inter Semi Bold", sans-serif;
+    font-size: 28px;
+}
+
+.heading-5 {
+    font-family: "Inter Semi Bold", sans-serif;
+    font-size: 23px;
+}
+
+.heading-6 {
+    font-family: "Inter Semi Bold", sans-serif;
+    font-size: 19px;
+}
+
+.paragraph {
+    font-family: "Inter Regular", sans-serif;
+    font-size: 16px;
+}
+
+.paragraph-interface {
+    font-family: "Inter Medium", sans-serif;
+    font-size: 16px;
+}
+
+.small {
+    font-family: "Inter Regular", sans-serif;
+    font-size: 13px;
+}
+
+.small-interface {
+    font-family: "Inter Medium", sans-serif;
+    font-size: 13px;
+}
+
+.mini {
+    font-family: "Inter Regular", sans-serif;
+    font-size: 11px;
 }

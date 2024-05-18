@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
-import fs from "fs";
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-icon',
@@ -12,23 +12,38 @@ import {DomSanitizer} from "@angular/platform-browser";
     templateUrl: './icon.component.html',
     styleUrl: './icon.component.css'
 })
-export class IconComponent {
+export class IconComponent implements OnInit{
 
+    /**
+     * Назва іконки, після Type= в назві файлу і до коми (наприклад 3D)
+     */
     @Input() iconName: string = "3D";
+    /**
+     * Розмір іконки LARGE(24px) або SMALL(16px)
+     */
     @Input() size: IconSize = IconSize.LARGE;
+    /**
+     * Товщина іконки LIGHT або REGULAR (різняться товщиною ліній
+     */
     @Input() weight: IconWeight = IconWeight.REGULAR;
+    /**
+     * Колір іконки, може бути назвою кольору (змінною в styles.css) або transparent
+     */
     @Input() color: string = "accent";
-    private svg: string = "";
+    private svg: SafeHtml = "";
     private sanitizer: DomSanitizer;
+    private http: HttpClient;
 
-    constructor(sanitizer: DomSanitizer) {
+    constructor(sanitizer: DomSanitizer, http: HttpClient) {
+        this.http = http;
         this.sanitizer = sanitizer;
     }
 
-    getSource(): string {
-        let path = `src/assets/icons/${"Type=" + this.iconName + ", Weight=" + this.weight}.svg`;
+    getSource(): SafeHtml {
+        // TODO треба буде його забрати
+        /*let path = `src/assets/icons/${"Type=" + this.iconName + ", Weight=" + this.weight}.svg`;
         let svgContent = fs.readFileSync(path, 'utf8');
-        this.svg = this.sanitizer.bypassSecurityTrustHtml(svgContent) as string;
+        this.svg = this.sanitizer.bypassSecurityTrustHtml(svgContent) as string;*/
         return this.svg;
     }
 
@@ -38,7 +53,17 @@ export class IconComponent {
     }
 
     getColor(): string {
+        if (this.color === "transparent"){
+            return "transparent";
+        }
         return "var(--" + this.color + ")";
+    }
+
+    ngOnInit(): void {
+        let path = `assets/icons/${"Type=" + this.iconName + ", Weight=" + this.weight}.svg`;
+        this.http.get(path, {responseType: 'text'}).subscribe(data => {
+            this.svg = this.sanitizer.bypassSecurityTrustHtml(data) as string;
+        });
     }
 }
 
