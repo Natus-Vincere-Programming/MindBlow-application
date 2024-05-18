@@ -1,15 +1,11 @@
 .onBat{
   background-color: var(--accent-95);
   border: none ;
-  font-size: var(--size-paragraph);
-  font-family: var(--font);
 
 }
 .ofBat{
   background-color: var(--accent-100);
   border: none;
-  font-size: var(--size-paragraph);
-  font-family: var(--font);
 }
 .norm img{
   margin-right: 16px;
