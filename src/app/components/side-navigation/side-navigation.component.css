@@ -7,10 +7,10 @@
   background-color: var(--accent-100);
   border: none;
 }
-.norm img{
+.norm app-icon{
   margin-right: 16px;
 }
-.norm img#second{
+.norm app-icon#second_img{
   margin-left: 16px;
 
  }
@@ -35,6 +35,11 @@
   justify-content: center;
 }
 
-.small img{
+.small app-icon{
   margin: 0 auto;
+}
+
+.small app-icon#second_img{
+  background-color: #1A1A1A;
+
 }

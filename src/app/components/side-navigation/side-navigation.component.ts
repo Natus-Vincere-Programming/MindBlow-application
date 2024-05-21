@@ -1,9 +1,12 @@
 import {Component, Input} from '@angular/core';
+import {IconComponent} from "../icon/icon.component";
 
 @Component({
   selector: 'app-side-navigation',
   standalone: true,
-  imports: [],
+    imports: [
+        IconComponent
+    ],
   templateUrl: './side-navigation.component.html',
   styleUrl: './side-navigation.component.css'
 })
@@ -11,8 +14,6 @@ export class SideNavigationComponent {
   @Input() buttonText!: string;
   @Input() type: string="";
   @Input() size: string="";
-  @Input() img_icon!: string;
-  @Input() img_icon2!: string;
 
 
 
