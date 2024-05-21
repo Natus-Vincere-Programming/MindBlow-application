@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {HttpClient} from "@angular/common/http";
+import {catchError, throwError} from "rxjs";
 
 @Component({
     selector: 'app-icon',
@@ -12,7 +13,7 @@ import {HttpClient} from "@angular/common/http";
     templateUrl: './icon.component.html',
     styleUrl: './icon.component.css'
 })
-export class IconComponent implements OnInit{
+export class IconComponent implements OnInit {
 
     /**
      * Назва іконки, після Type= в назві файлу і до коми (наприклад 3D)
@@ -53,7 +54,7 @@ export class IconComponent implements OnInit{
     }
 
     getColor(): string {
-        if (this.color === "transparent"){
+        if (this.color === "transparent") {
             return "transparent";
         }
         return "var(--" + this.color + ")";
@@ -61,7 +62,11 @@ export class IconComponent implements OnInit{
 
     ngOnInit(): void {
         let path = `assets/icons/${"Type=" + this.iconName + ", Weight=" + this.weight}.svg`;
-        this.http.get(path, {responseType: 'text'}).subscribe(data => {
+        this.http.get(path, {responseType: 'text'}).pipe(
+            catchError(() => {
+                return throwError(() => new Error('Іконку за шляхом ' + path + ' не знайдено. Встановіть правильний iconName чи weight.'))
+            })
+        ).subscribe(data => {
             this.svg = this.sanitizer.bypassSecurityTrustHtml(data) as string;
         });
     }
