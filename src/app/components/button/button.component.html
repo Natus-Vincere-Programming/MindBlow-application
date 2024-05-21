@@ -1,1 +1,39 @@
-<button [class]=getStyle() >{{buttonText}}</button>
+<!--<style>-->
+<!--    app-icon {-->
+
+<!--        -->
+
+<!--        display: flex;-->
+<!--    }-->
+
+<!--    button {-->
+<!--        display: flex;-->
+<!--        align-items: center;-->
+<!--        justify-content: center;-->
+<!--    }-->
+<!--</style>-->
+
+
+<!--<button [class]=getStyle() ><app-icon></app-icon>{{buttonText}}</button>-->
+<style>
+    app-icon {
+        display: flex;
+    }
+
+    .left-icon button {
+        display: flex;
+        align-items: center; /* Вирівнює елементи всередині кнопки по вертикалі */
+        justify-content: flex-start; /* Вирівнює елементи всередині кнопки по лівому краю */
+    }
+
+    .right-icon button {
+        display: flex;
+        align-items: center; /* Вирівнює елементи всередині кнопки по вертикалі */
+        justify-content: flex-end; /* Вирівнює елементи всередині кнопки по правому краю */
+    }
+</style>
+<button [class]="getStyle()" iconPosition="right">
+    <app-icon *ngIf="iconPosition === 'left'"></app-icon>
+    {{ buttonText }}
+    <app-icon *ngIf="iconPosition === 'right'"></app-icon>
+</button>

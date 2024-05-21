@@ -30,7 +30,9 @@ export class IconComponent implements OnInit{
      * Колір іконки, може бути назвою кольору (змінною в styles.css) або transparent
      */
     @Input() color: string = "accent";
-    private svg: SafeHtml = "";
+
+
+    private svg: SafeHtml="";
     private sanitizer: DomSanitizer;
     private http: HttpClient;
 
