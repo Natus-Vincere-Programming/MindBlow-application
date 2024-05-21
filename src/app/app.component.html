@@ -8,10 +8,10 @@
 </style>
 <p>Something text</p>
 <div>
-  <app-side-navigation [type]=CssSN.On [size]=CssSN.Normal type="3D" buttonText="Component"></app-side-navigation>
-  <app-side-navigation [type]=CssSN.Of [size]=CssSN.Normal buttonText="Component" img_icon="assets/svg/ArrowLeft2.svg" img_icon2="assets/svg/ArrowDown2.svg" ></app-side-navigation>
-  <app-side-navigation [type]=CssSN.On [size]=CssSN.Small buttonText="" img_icon="assets/svg/ArrowLeft2.svg"></app-side-navigation>
-  <app-side-navigation [type]=CssSN.Of [size]=CssSN.Small buttonText="" img_icon="assets/svg/ArrowDown2.svg"></app-side-navigation>
+  <app-side-navigation [type]=CssSN.On [size]=CssSN.Normal  img_type1="Arrow Down 2" [weight1]="IconWeight.LIGHT" img_type2="Arrow Down 2" [weight2]="IconWeight.REGULAR" buttonText="Component"></app-side-navigation>
+  <app-side-navigation [type]=CssSN.Of [size]=CssSN.Normal   img_type1="3D"  img_type2="3D" buttonText="Component"  ></app-side-navigation>
+  <app-side-navigation [type]=CssSN.On [size]=CssSN.Small  img_type1="3D" [weight1]="IconWeight.REGULAR"  buttonText="" ></app-side-navigation>
+  <app-side-navigation [type]=CssSN.Of [size]=CssSN.Small img_type1="3D" [weight1]="IconWeight.REGULAR" buttonText="" ></app-side-navigation>
   <app-checkbox [isFull]="false" [showText]="true"></app-checkbox>
     <app-checkbox [isFull]="false" text="воно працює"></app-checkbox>
     <app-checkbox></app-checkbox>

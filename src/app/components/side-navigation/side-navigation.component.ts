@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IconComponent} from "../icon/icon.component";
+import {IconComponent, IconWeight} from "../icon/icon.component";
 
 @Component({
   selector: 'app-side-navigation',
@@ -14,6 +14,11 @@ export class SideNavigationComponent {
   @Input() buttonText!: string;
   @Input() type: string="";
   @Input() size: string="";
+  @Input() img_type1: string="3D";
+  @Input() img_type2: string="3D";
+  @Input() weight1: IconWeight = IconWeight.REGULAR;
+  @Input() weight2: IconWeight = IconWeight.REGULAR;
+
 
 
 
@@ -22,6 +27,7 @@ export class SideNavigationComponent {
     return this.type+" "+this.size;
   }
 }
+
 
 export enum CssSN {
   On = "onBat",

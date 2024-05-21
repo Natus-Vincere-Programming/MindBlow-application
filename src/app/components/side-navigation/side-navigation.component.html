@@ -1,7 +1,6 @@
-
 <button [class]=getStyle() >
-    <app-icon class="first_img" ></app-icon>
+    <app-icon id="first_img" [iconName]="img_type1"  [weight]="weight1"></app-icon>
   <span class="paragraph" >{{buttonText}}</span>
-    <app-icon class="second_img"></app-icon>
+    <app-icon id="second_img" [iconName]="img_type2" [weight]="weight2"></app-icon>
 </button>
 
