@@ -5,7 +5,7 @@ import {CssSN} from "./components/side-navigation/side-navigation.component";
 import {CheckboxComponent} from "./components/checkbox/checkbox.component";
 import {IconComponent, IconSize, IconWeight} from "./components/icon/icon.component";
 import {HttpClientModule} from "@angular/common/http";
-import {AvatarComponent} from "./components/avatar/avatar.component";
+import {AvatarComponent, AvatarSize} from "./components/avatar/avatar.component";
 
 @Component({
   selector: 'app-root',
@@ -24,6 +24,8 @@ export class AppComponent {
   testConsole() {
     console.log("testConsole");
   }
+
+    protected readonly AvatarSize = AvatarSize;
 }
 
 
