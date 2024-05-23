@@ -14,10 +14,9 @@ export class SideNavigationComponent {
   @Input() buttonText!: string;
   @Input() type: string="";
   @Input() size: string="";
-  @Input() img_type1: string="3D";
-  @Input() img_type2: string="3D";
-  @Input() weight1: IconWeight = IconWeight.REGULAR;
-  @Input() weight2: IconWeight = IconWeight.REGULAR;
+  @Input() imgType1: string="3D";
+  @Input() imgType2: string="3D";
+  @Input() weight: IconWeight = IconWeight.REGULAR;
 
 
 
