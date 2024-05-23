@@ -5,11 +5,12 @@ import {CssSN} from "./components/side-navigation/side-navigation.component";
 import {CheckboxComponent} from "./components/checkbox/checkbox.component";
 import {IconComponent, IconSize, IconWeight} from "./components/icon/icon.component";
 import {HttpClientModule} from "@angular/common/http";
+import {AvatarComponent, AvatarSize} from "./components/avatar/avatar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CheckboxComponent, IconComponent, HttpClientModule, SideNavigationComponent],
+    imports: [RouterOutlet, CheckboxComponent, IconComponent, HttpClientModule, SideNavigationComponent, AvatarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -23,6 +24,8 @@ export class AppComponent {
   testConsole() {
     console.log("testConsole");
   }
+
+    protected readonly AvatarSize = AvatarSize;
 }
 
 
