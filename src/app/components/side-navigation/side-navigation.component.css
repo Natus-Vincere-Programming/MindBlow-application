@@ -22,6 +22,9 @@
   min-width: 100px;
   margin: auto;
   color: var(--accent-20);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .norm{
   width: 200px;
