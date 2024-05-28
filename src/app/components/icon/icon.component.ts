@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
     selector: 'app-icon',

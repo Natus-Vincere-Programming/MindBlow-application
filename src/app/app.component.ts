@@ -4,15 +4,11 @@ import {SideNavigationComponent} from "./components/side-navigation/side-navigat
 import {CssSN} from "./components/side-navigation/side-navigation.component";
 import {CheckboxComponent} from "./components/checkbox/checkbox.component";
 import {IconComponent, IconSize, IconWeight} from "./components/icon/icon.component";
-import {HttpClientModule} from "@angular/common/http";
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CheckboxComponent, IconComponent, HttpClientModule, SideNavigationComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-})
+@Component({ selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css', imports: [RouterOutlet, CheckboxComponent, IconComponent, SideNavigationComponent] })
 export class AppComponent {
   title = 'MindBlow-application';
   text="CssSN";
