@@ -38,4 +38,27 @@ export class AuthenticationService {
             });
         });
     }
+
+    refreshToken(): Promise<boolean> {
+        return new Promise((resolve) => {
+            this.http.post<AuthenticationResponse>(this.url + "/refresh-token",'', {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem('refresh_token')
+                }
+            }).subscribe({
+                next: (response: AuthenticationResponse): void => {
+                    if (response == undefined || response.access_token == undefined || response.refresh_token == undefined) {
+                        resolve(false);
+                        return;
+                    }
+                    localStorage.setItem('access_token', response.access_token);
+                    localStorage.setItem('refresh_token', response.refresh_token);
+                    resolve(true);
+                },
+                error: (err) => {
+                    resolve(false);
+                }
+            });
+        });
+    }
 }
