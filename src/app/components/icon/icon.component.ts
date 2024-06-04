@@ -27,7 +27,7 @@ export class IconComponent implements OnInit{
      */
     @Input() weight: IconWeight = IconWeight.REGULAR;
     /**
-     * Колір іконки, може бути назвою кольору (змінною в styles.css) або transparent
+     * Колір іконки, може бути назвою кольору (змінною в styles.scss) або transparent
      */
     @Input() color: string = "accent";
     private svg: SafeHtml = "";
