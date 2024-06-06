@@ -1,26 +1,40 @@
 import {AbstractControl} from "@angular/forms";
 
 export class ErrorMessageHandler {
-    private errorMessage: ErrorMessage = {message: ''};
+    private _errorMessage: ErrorMessage = {message: ''};
+    private readonly requiredErrorMessage?: string;
+    private readonly emailErrorMessage?: string;
+    private readonly otherErrorMessage?: string;
 
-    updateErrorMessage(control: AbstractControl<any, any>, requiredErrorMessage?: string, emailErrorMessage?: string, otherErrorMessage?: string): void {
-        console.log(control.errors);
+
+    constructor(requiredErrorMessage?: string, emailErrorMessage?: string, otherErrorMessage?: string) {
+        this.requiredErrorMessage = requiredErrorMessage;
+        this.emailErrorMessage = emailErrorMessage;
+        this.otherErrorMessage = otherErrorMessage;
+    }
+
+    updateErrorMessage(control: AbstractControl<any, any>): void {
         if (control.hasError('required')) {
-            this.errorMessage.message = requiredErrorMessage ? requiredErrorMessage : 'Введіть дані';
+            this._errorMessage.message = this.requiredErrorMessage ? this.requiredErrorMessage : 'Введіть дані';
             return;
         } else if (control.hasError('email')) {
-            this.errorMessage.message = emailErrorMessage ? emailErrorMessage : 'Недійсна пошта';
+            this._errorMessage.message = this.emailErrorMessage ? this.emailErrorMessage : 'Недійсна пошта';
             return;
         } else if (control.invalid) {
-            this.errorMessage.message = otherErrorMessage ? otherErrorMessage : 'Недійсні дані';
+            this._errorMessage.message = this.otherErrorMessage ? this.otherErrorMessage : 'Недійсні дані';
             return;
         } else {
-            this.errorMessage.message = '';
+            this._errorMessage.message = '';
         }
     }
 
     getErrorMessage(): string {
-        return this.errorMessage.message;
+        return this._errorMessage.message;
+    }
+
+
+    set errorMessage(value: ErrorMessage) {
+        this._errorMessage = value;
     }
 }
 

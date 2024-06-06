@@ -7,9 +7,5 @@ import {provideHttpClient, withFetch} from "@angular/common/http";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
-    providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(withFetch()), provideAnimationsAsync()]
+    providers: [provideRouter(routes, withDebugTracing()), provideClientHydration(), provideHttpClient(withFetch()), provideAnimationsAsync()]
 };
-
-export const getApiUrl = (): string => {
-    return 'http://localhost:8080/api/v1';
-}

@@ -1,7 +1,7 @@
 <div class="register-page">
     <div class="register-box">
         <p>Реєстрація</p>
-        <form class="form-box" [formGroup]="registerForm">
+        <form class="form-box" [formGroup]="registerForm" (submit)="onSubmit()">
             <mat-form-field appearance="outline" subscriptSizing="dynamic" hideRequiredMarker="true">
                 <mat-label>Електронна пошта</mat-label>
                 <input matInput type="email" formControlName="email" required autocomplete="email">
@@ -28,18 +28,24 @@
             <div class="same-information-box">
                 <mat-form-field appearance="outline" subscriptSizing="dynamic" hideRequiredMarker="true">
                     <mat-label>Пароль</mat-label>
-                    <input matInput type="password" formControlName="password" required autocomplete="new-password">
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required autocomplete="new-password">
+                    <button type="button" mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Сховати пароль'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
                     @if(registerForm.get("password")?.invalid) {
                         <mat-error>{{errorHandlers.password.getErrorMessage()}}</mat-error>
                     }
                 </mat-form-field>
                 <mat-form-field appearance="outline" subscriptSizing="dynamic" hideRequiredMarker="true">
                     <mat-label>Повторіть пароль</mat-label>
-                    <input matInput type="password">
+                    <input matInput type="password" [formControl]="confirmPassword">
+                    @if(confirmPassword.invalid) {
+                        <mat-error>{{errorHandlers.confirmPassword.getErrorMessage()}}</mat-error>
+                    }
                 </mat-form-field>
             </div>
             <div class="register-buttons">
-                <button type="button" mat-button color="primary" routerLink="/login">Скасувати</button>
+                <a mat-button color="primary" routerLink="/login">Скасувати</a>
                 <button type="submit" mat-flat-button color="primary">Зареєструватися</button>
             </div>
         </form>

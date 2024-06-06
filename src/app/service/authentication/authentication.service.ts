@@ -1,15 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {getApiUrl} from "../../app.config";
 import {AuthenticationResponse} from "./authentication-response";
-import {Observable} from "rxjs";
-import {ValidationErrors} from "@angular/forms";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
-    private readonly url: string = getApiUrl() + '/auth';
+    private readonly url: string = 'http://localhost:8080/api/v1' + '/auth';
 
     constructor(private http: HttpClient) {
     }
@@ -43,7 +40,7 @@ export class AuthenticationService {
 
     refreshToken(): Promise<boolean> {
         return new Promise((resolve) => {
-            this.http.post<AuthenticationResponse>(this.url + "/refresh-token",'', {
+            this.http.post<AuthenticationResponse>(this.url + "/refresh-token", '', {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem('refresh_token')
                 }

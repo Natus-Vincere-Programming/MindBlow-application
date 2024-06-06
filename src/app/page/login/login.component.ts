@@ -3,8 +3,8 @@ import {MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {MatInput} from "@angular/material/input";
 import {MatIcon} from "@angular/material/icon";
-import {MatButton, MatIconButton} from "@angular/material/button";
-import {Router, RouterLink} from "@angular/router";
+import {MatAnchor, MatButton, MatIconButton} from "@angular/material/button";
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {
     AbstractControl,
@@ -36,7 +36,9 @@ import {ErrorStateMatcher} from "@angular/material/core";
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
-        NgIf
+        NgIf,
+        RouterOutlet,
+        MatAnchor
     ],
     providers: [AuthenticationService, Router],
     templateUrl: './login.component.html',
@@ -50,7 +52,6 @@ export class LoginComponent {
     errorMessageEmail: string = '';
     errorMessagePassword: string = '';
     invalidCredentials: boolean = false;
-    errorMessageInvalidCredentials: string = '';
     errorMatcher: ErrorMatcher = new ErrorMatcher(this.invalidCredentials);
 
     constructor(private authenticationService: AuthenticationService, private router: Router) {
@@ -112,6 +113,7 @@ export class ErrorMatcher implements ErrorStateMatcher {
     constructor(isInvalidCredentials: boolean) {
         this._isInvalidCredentials = isInvalidCredentials;
     }
+
     isErrorState(control: AbstractControl<any, any> | null, form: FormGroupDirective | NgForm | null): boolean {
         if (control?.invalid && control?.touched) {
             return true;
