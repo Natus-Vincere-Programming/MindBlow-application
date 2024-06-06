@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {getApiUrl} from "../../app.config";
 import {AuthenticationResponse} from "./authentication-response";
+import {Observable} from "rxjs";
+import {ValidationErrors} from "@angular/forms";
 
 @Injectable({
     providedIn: 'root'
@@ -54,6 +56,19 @@ export class AuthenticationService {
                     localStorage.setItem('access_token', response.access_token);
                     localStorage.setItem('refresh_token', response.refresh_token);
                     resolve(true);
+                },
+                error: (err) => {
+                    resolve(false);
+                }
+            });
+        });
+    }
+
+    checkTakenEmail(email: string): Promise<boolean> {
+        return new Promise((resolve) => {
+            this.http.get<boolean>(this.url + "/email?email=" + email).subscribe({
+                next: (response: boolean) => {
+                    resolve(response);
                 },
                 error: (err) => {
                     resolve(false);
