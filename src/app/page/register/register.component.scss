@@ -66,7 +66,7 @@
 @mixin typography($theme) {
   .register-box p {
     color: mat.get-theme-color($theme, on-surface);
-    font: mat.get-theme-typography($theme, headline-large, font);
+    font: mat.get-theme-typography($theme, display-medium, font);
   }
 }
 

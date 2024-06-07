@@ -8,7 +8,7 @@ import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {
     AbstractControl,
-    FormControl,
+    FormControl, FormGroup,
     FormGroupDirective,
     FormsModule,
     NgForm,
@@ -16,9 +16,10 @@ import {
     Validators
 } from "@angular/forms";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {merge} from "rxjs";
+import {merge, take} from "rxjs";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {ErrorStateMatcher} from "@angular/material/core";
+import {ErrorMessageHandler} from "../../utility/error-message-handler";
 
 @Component({
     selector: 'app-login',
@@ -44,22 +45,25 @@ import {ErrorStateMatcher} from "@angular/material/core";
     styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-    email: FormControl = new FormControl('', [Validators.required, Validators.email]);
-    password: FormControl = new FormControl('', [Validators.required]);
-    rememberMe: FormControl = new FormControl(false);
+    loginForm: FormGroup = new FormGroup({
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [Validators.required]),
+        rememberMe: new FormControl(false)
+    });
+    loginErrorHandlers: LoginErrorHandlers = {
+        email: new ErrorMessageHandler('Введіть пошту', 'Недійсна пошта', 'Неправильна пошта або пароль'),
+        password: new ErrorMessageHandler('Введіть пароль', '', 'Неправильна пошта або пароль')
+    };
     hidePassword: boolean = true;
-    errorMessageEmail: string = '';
-    errorMessagePassword: string = '';
-    invalidCredentials: boolean = false;
-    errorMatcher: ErrorMatcher = new ErrorMatcher(this.invalidCredentials);
 
     constructor(private authenticationService: AuthenticationService, private router: Router) {
-        merge(this.email.statusChanges, this.email.valueChanges)
+        const {email, password, rememberMe}= this.loginForm.controls;
+        merge(email.statusChanges, email.valueChanges, email.updateOn)
             .pipe(takeUntilDestroyed())
-            .subscribe(() => this.updateErrorMessageEmail());
-        merge(this.password.statusChanges, this.password.valueChanges)
+            .subscribe(() => this.loginErrorHandlers.email.updateErrorMessage(email));
+        merge(password.statusChanges, password.valueChanges, email.updateOn)
             .pipe(takeUntilDestroyed())
-            .subscribe(() => this.updateErrorMessagePassword());
+            .subscribe(() => this.loginErrorHandlers.password.updateErrorMessage(password));
     }
 
     clickEvent(event: MouseEvent) {
@@ -67,62 +71,39 @@ export class LoginComponent {
         event.stopPropagation();
     }
 
-    protected updateErrorMessageEmail() {
-        if (this.email.hasError('required')) {
-            this.errorMessageEmail = 'Введіть пошту';
-        } else if (this.email.hasError('email')) {
-            this.errorMessageEmail = 'Недійсна пошта';
-        } else {
-            this.errorMessageEmail = '';
-        }
-    }
-
-    protected updateErrorMessagePassword() {
-        if (this.password.hasError('required')) {
-            this.errorMessagePassword = 'Введіть пароль';
-        } else {
-            this.errorMessagePassword = '';
-        }
-    }
-
-    authenticate(): void {
-        if (this.email.hasError('required') || this.email.hasError('email') || this.password.hasError('required')) {
+    onSubmit(): void {
+        if (this.loginForm.invalid) {
+            this.loginForm.markAllAsTouched();
             return;
         }
-        const isAuthenticated: Promise<boolean> = this.authenticationService.authenticate(this.email.value, this.password.value, this.rememberMe.value);
+        const {email, password, rememberMe}= this.loginForm.controls;
+        const isAuthenticated: Promise<boolean> = this.authenticationService.authenticate(email.value, password.value, rememberMe.value);
         isAuthenticated.then((isAuthenticated: boolean) => {
             if (isAuthenticated) {
-                this.invalidCredentials = false;
-                this.router.navigate(['dashboard']).then(r => console.log(r));
+                this.router.navigate(['dashboard']);
             } else {
-                this.email.markAsUntouched();
-                this.password.markAsUntouched();
-                this.invalidCredentials = true;
-                this.errorMatcher.isInvalidCredentials = true;
-                this.errorMessageEmail = 'Неправильна пошта або пароль';
-                this.errorMessagePassword = 'Неправильна пошта або пароль';
+                this.setInputErrors();
             }
         });
     }
-}
 
-export class ErrorMatcher implements ErrorStateMatcher {
-    private _isInvalidCredentials: boolean = false;
-
-    constructor(isInvalidCredentials: boolean) {
-        this._isInvalidCredentials = isInvalidCredentials;
-    }
-
-    isErrorState(control: AbstractControl<any, any> | null, form: FormGroupDirective | NgForm | null): boolean {
-        if (control?.invalid && control?.touched) {
-            return true;
-        }
-        return this._isInvalidCredentials && !control?.touched;
-    }
-
-
-    set isInvalidCredentials(value: boolean) {
-        this._isInvalidCredentials = value;
+    setInputErrors(): void {
+        const {email, password}= this.loginForm.controls;
+        email.setErrors({invalidCredentials: true});
+        password.setErrors({invalidCredentials: true});
+        merge(email.valueChanges)
+            .pipe(take(1))
+            .subscribe(() => email.setErrors(null));
+        merge(password.valueChanges)
+            .pipe(take(1))
+            .subscribe(() => password.setErrors(null));
     }
 }
+
+interface LoginErrorHandlers {
+    email: ErrorMessageHandler;
+    password: ErrorMessageHandler;
+}
+
+
 
