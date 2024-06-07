@@ -40,7 +40,6 @@ import {ErrorStateMatcher} from "@angular/material/core";
         RouterOutlet,
         MatAnchor
     ],
-    providers: [AuthenticationService, Router],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })
