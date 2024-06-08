@@ -1,62 +1,32 @@
 <div class="login-page">
     <div class="login-box">
-        <img ngSrc="assets/mindglow_logo.svg" height="65" width="402" alt="Лого" draggable="false" priority="5">
-        <div class="field-box">
-            <mat-form-field
-                    appearance="outline"
-                    subscriptSizing="dynamic"
-                    hideRequiredMarker="true">
+        <img ngSrc="assets/mindglow_logo.svg" width= "1000" draggable="false" priority="5" height="400">
+        <form class="field-box" (submit)="onSubmit()" [formGroup]="loginForm">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" hideRequiredMarker="true">
                 <mat-label>Електронна адреса</mat-label>
-                <input matInput
-                       [errorStateMatcher]="errorMatcher"
-                       type="email"
-                       [formControl]="email"
-                       (blur)="updateErrorMessageEmail()"
-                >
-                @if (email.invalid || invalidCredentials) {
-                    <mat-error>{{ errorMessageEmail }}</mat-error>
+                <input matInput type="email" formControlName="email" required autocomplete="email">
+                @if (loginForm.get("email")?.invalid) {
+                    <mat-error>{{loginErrorHandlers.email.getErrorMessage()}}</mat-error>
                 }
             </mat-form-field>
             <div class="recovery-box">
-                <mat-form-field
-                        appearance="outline"
-                        subscriptSizing="dynamic"
-                        hideRequiredMarker="true"
-                        >
+                <mat-form-field appearance="outline" subscriptSizing="dynamic" hideRequiredMarker="true">
                     <mat-label>Пароль</mat-label>
-                    <input
-                            [errorStateMatcher]="errorMatcher"
-                            type="password"
-                            matInput [type]="hidePassword ? 'password' : 'text'"
-                            [formControl]="password"
-                            (blur)="updateErrorMessagePassword()"
-                    >
-                    <button
-                            mat-icon-button
-                            matSuffix
-                            (click)="clickEvent($event)"
-                            [attr.aria-label]="'Сховати пароль'"
-                            [attr.aria-pressed]="hidePassword">
+                    <input type="password" matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required autocomplete="current-password">
+                    <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Сховати пароль'" [attr.aria-pressed]="hidePassword" type="button">
                         <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
                     </button>
-                    @if (password.invalid || invalidCredentials) {
-                        <mat-error>{{ errorMessagePassword }}</mat-error>
+                    @if (loginForm.get("password")?.invalid) {
+                        <mat-error>{{loginErrorHandlers.password.getErrorMessage()}}</mat-error>
                     }
                 </mat-form-field>
                 <a routerLink="/recovery">Забули пароль?</a>
             </div>
-            <mat-checkbox [formControl]="rememberMe">Запам'ятати мене</mat-checkbox>
+            <mat-checkbox formControlName="rememberMe">Запам'ятати мене</mat-checkbox>
             <div class="buttons">
-                <button
-                        mat-button color="primary"
-                        routerLink="/register">Зареєструватися
-                </button>
-                <button
-                        mat-flat-button
-                        color="primary"
-                        (click)="authenticate()">Увійти
-                </button>
+                <a mat-button color="primary" routerLink="/register">Зареєструватися</a>
+                <button type="submit" mat-flat-button color="primary">Увійти</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>

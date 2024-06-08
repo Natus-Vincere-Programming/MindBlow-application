@@ -4,6 +4,9 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use "app/page/login/login.component.scss" as login-page;
+@use "app/page/register/register.component.scss" as register-page;
+@use "app/page/register/register-pending/register-pending.component.scss" as register-pending-page;
+
 
 // Note: Color palettes are generated from primary: #525CEB
 $_palettes: (
@@ -154,4 +157,6 @@ $dark-theme: mat.define-theme((
 :root {
   @include mat.all-component-themes($light-theme);
   @include login-page.theme($light-theme);
+  @include register-page.theme($light-theme);
+  @include register-pending-page.theme($light-theme);
 }
