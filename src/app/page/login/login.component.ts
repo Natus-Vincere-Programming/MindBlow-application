@@ -19,7 +19,8 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {merge, take} from "rxjs";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {ErrorStateMatcher} from "@angular/material/core";
-import {ErrorMessageHandler} from "../../utility/error-message-handler";
+import {ErrorMessageHandler} from "../../utility/error-message.handler";
+import {FormService} from "../../service/form/form.service";
 
 @Component({
     selector: 'app-login',
@@ -56,7 +57,9 @@ export class LoginComponent {
     };
     hidePassword: boolean = true;
 
-    constructor(private authenticationService: AuthenticationService, private router: Router) {
+    constructor(
+        private formService: FormService,
+        private router: Router) {
         const {email, password, rememberMe}= this.loginForm.controls;
         merge(email.statusChanges, email.valueChanges, email.updateOn)
             .pipe(takeUntilDestroyed())
@@ -77,11 +80,8 @@ export class LoginComponent {
             return;
         }
         const {email, password, rememberMe}= this.loginForm.controls;
-        const isAuthenticated: Promise<boolean> = this.authenticationService.authenticate(email.value, password.value, rememberMe.value);
-        isAuthenticated.then((isAuthenticated: boolean) => {
-            if (isAuthenticated) {
-                this.router.navigate(['dashboard']);
-            } else {
+        this.formService.authenticate(email.value, password.value, rememberMe.value).then((isAuthenticated: boolean) => {
+            if (!isAuthenticated) {
                 this.setInputErrors();
             }
         });

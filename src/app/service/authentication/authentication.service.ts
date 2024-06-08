@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {AuthenticationResponse} from "./authentication-response";
+import {AuthenticationResponse} from "./authentication.response";
+import {RegisterRequest} from "./register.request";
 
 @Injectable({
     providedIn: 'root'
@@ -8,54 +9,22 @@ import {AuthenticationResponse} from "./authentication-response";
 export class AuthenticationService {
     private readonly url: string = 'http://localhost:8080/api/v1' + '/auth';
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+    ) {
     }
 
-    authenticate(email: string, password: string, remember: boolean): Promise<boolean> {
+    authenticate(email: string, password: string, remember: boolean): Promise<AuthenticationResponse | null> {
         return new Promise((resolve) => {
             this.http.post<AuthenticationResponse>(this.url + "/authenticate", {
                 email,
                 password
             }).subscribe({
                 next: (response: AuthenticationResponse): void => {
-                    if (response == undefined || response.access_token == undefined || response.refresh_token == undefined) {
-                        resolve(false);
-                        return;
-                    }
-                    if (remember) {
-                        localStorage.setItem('access_token', response.access_token);
-                        localStorage.setItem('refresh_token', response.refresh_token);
-                    } else {
-                        sessionStorage.setItem('access_token', response.access_token);
-                        sessionStorage.setItem('refresh_token', response.refresh_token);
-                    }
-                    resolve(true);
+                    resolve(response);
                 },
                 error: (err) => {
-                    resolve(false);
-                }
-            });
-        });
-    }
-
-    refreshToken(): Promise<boolean> {
-        return new Promise((resolve) => {
-            this.http.post<AuthenticationResponse>(this.url + "/refresh-token", '', {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem('refresh_token')
-                }
-            }).subscribe({
-                next: (response: AuthenticationResponse): void => {
-                    if (response == undefined || response.access_token == undefined || response.refresh_token == undefined) {
-                        resolve(false);
-                        return;
-                    }
-                    localStorage.setItem('access_token', response.access_token);
-                    localStorage.setItem('refresh_token', response.refresh_token);
-                    resolve(true);
-                },
-                error: (err) => {
-                    resolve(false);
+                    resolve(null);
                 }
             });
         });
@@ -68,6 +37,45 @@ export class AuthenticationService {
                     resolve(response);
                 },
                 error: (err) => {
+                    resolve(false);
+                }
+            });
+        });
+    }
+
+    register(param: RegisterRequest): Promise<AuthenticationResponse | null> {
+        return new Promise((resolve) => {
+            this.http.post<AuthenticationResponse>(this.url + "/register", param).subscribe({
+                next: (response: AuthenticationResponse) => {
+                    resolve(response);
+                },
+                error: () => {
+                    resolve(null);
+                }
+            });
+        });
+    }
+
+    refreshToken(): Promise<AuthenticationResponse | null> {
+        return new Promise((resolve) => {
+            this.http.post<AuthenticationResponse>(this.url + "/refresh-token", '', {}).subscribe({
+                next: (response: AuthenticationResponse): void => {
+                    resolve(response);
+                },
+                error: (err) => {
+                    resolve(null);
+                }
+            });
+        });
+    }
+
+    logout(): Promise<boolean> {
+        return new Promise((resolve) => {
+            this.http.post(this.url + "/logout", {}).subscribe({
+                next: () => {
+                    resolve(true);
+                },
+                error: () => {
                     resolve(false);
                 }
             });

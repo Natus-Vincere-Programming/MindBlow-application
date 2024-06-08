@@ -13,12 +13,13 @@ import {
 import {MatError, MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatAnchor, MatButton, MatIconButton} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {merge, Observable} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {ErrorMessageHandler} from "../../utility/error-message-handler";
+import {ErrorMessageHandler} from "../../utility/error-message.handler";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {MatIcon} from "@angular/material/icon";
+import {FormService} from "../../service/form/form.service";
 
 @Component({
     selector: 'app-register',
@@ -73,7 +74,11 @@ export class RegisterComponent {
     });
     hidePassword: boolean = true;
 
-    constructor(private emailValidator: TakenEmailValidator) {
+    constructor(
+        private emailValidator: TakenEmailValidator,
+        private router: Router,
+        private formService: FormService
+    ) {
         const emailControl = this.registerForm.get('email');
         const firstNameControl = this.registerForm.get('firstName');
         const lastNameControl = this.registerForm.get('lastName');
@@ -115,7 +120,12 @@ export class RegisterComponent {
             this.confirmPassword?.markAsTouched();
             return;
         }
-        console.log('Submitted');
+        this.formService.register(
+            this.registerForm.get('email')?.value,
+            this.registerForm.get('firstName')?.value,
+            this.registerForm.get('lastName')?.value,
+            this.registerForm.get('password')?.value
+        );
     }
 }
 
