@@ -17,8 +17,16 @@ export class JwtService {
         return this.localStorage.get('access_token') ?? this.sessionStorage.get('access_token') ?? null;
     }
 
+    getAccessTokenAsync(): Promise<string | null> {
+        return this.localStorage.getAsync('access_token') ?? this.sessionStorage.getAsync('access_token') ?? Promise.resolve(null);
+    }
+
     getRefreshToken(): string | null {
         return this.localStorage.get('refresh_token') ?? this.sessionStorage.get('refresh_token') ?? null;
+    }
+
+    getRefreshTokenAsync(): Promise<string | null> {
+        return this.localStorage.getAsync('refresh_token') ?? this.sessionStorage.getAsync('refresh_token') ?? Promise.resolve(null);
     }
 
     getAvailableToken(): string | null {

@@ -1,27 +1,36 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
 import {UserService} from "../service/user/user.service";
+import {HttpClient} from "@angular/common/http";
+import {apiUrl} from "../utility/storage";
 
 export const authGuard: CanActivateFn = (route, state): Promise<boolean> => {
     return new Promise<boolean>((resolve) => {
         const userService = inject(UserService);
-        const user = userService.getUser();
+        const http = inject(HttpClient);
         const router = inject(Router);
-        user.then(response => {
+        http.get<string>(apiUrl + '/demo-controller').subscribe(response => {
+            if (response === "Hello from secured endpoint") {
+                resolve(true);
+            } else resolve(false);
+        });
+        /*user.then(response => {
             if (response === null) {
                 router.navigate(['login']).then(() => {
+                    console.debug('User is not authorized. Redirect to login page (auth guard)');
                     resolve(false);
                 })
                 return;
             }
-            console.log(route.url.toString());
-            if (response.enabled && route.url.toString() === 'pending') {
+            if (response.enabled) {
+                console.debug('User is enabled. Continue... (auth guard)');
                 resolve(true);
             } else {
-                router.navigate(['login']).then(() => {
+                router.navigate(['pending']).then(() => {
+                    console.debug('User is not enabled. Redirect to pending page (auth guard)');
                     resolve(false);
                 })
             }
-        })
+        })*/
     })
 };

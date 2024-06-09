@@ -30,4 +30,19 @@ export class UserService {
             });
         });
     }
+
+    getUserAsync(): Promise<UserResponse | null> {
+        return new Promise((resolve) => {
+            this.jwtService.getAccessTokenAsync().then((token) => {
+                this.http.get<UserResponse>(this.url + "?token=" + token).subscribe({
+                    next: (response: UserResponse) => {
+                        resolve(response);
+                    },
+                    error: (err) => {
+                        resolve(null);
+                    }
+                });
+            });
+        });
+    }
 }
