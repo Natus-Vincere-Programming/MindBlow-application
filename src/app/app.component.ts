@@ -6,6 +6,7 @@ import {IconComponent, IconSize, IconWeight} from "./components/icon/icon.compon
 import {LoginComponent} from "./page/login/login.component";
 import {RedirectService} from "./service/redirect/redirect.service";
 import {NgIf} from "@angular/common";
+import {MatIconRegistry} from "@angular/material/icon";
 
 @Component({
     selector: 'app-root',
@@ -17,10 +18,11 @@ import {NgIf} from "@angular/common";
 export class AppComponent implements OnInit {
     readyToRender: boolean = false;
 
-    constructor(private redirectService: RedirectService) {
+    constructor(private redirectService: RedirectService, private iconRegistry: MatIconRegistry) {
     }
 
     ngOnInit(): void {
+        this.iconRegistry.setDefaultFontSetClass('material-symbols-rounded');
         this.redirectService.checkAuthorization().then(() => this.readyToRender = true);
     }
 }

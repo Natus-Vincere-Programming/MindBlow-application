@@ -43,12 +43,13 @@
 }
 
 .recovery-box {
-    display: flex;
+    display: block;
     flex-direction: column;
     gap: 5px;
 }
 
 .recovery-box a {
+    display: flex;
     text-decoration: none;
     margin-left: 5px;
 }
