@@ -34,7 +34,7 @@
 }
 
 @mixin typography($theme) {
-  .mdc-list-item__primary-text {
+  .navigation mdc-list-item__primary-text {
     text-decoration: none;
     color: mat.get-theme-color($theme, on-surface-variant);
     font: mat.get-theme-typography($theme, label-large, font);

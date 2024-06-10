@@ -12,6 +12,7 @@ import {TeachersComponent} from "./page/teachers/teachers/teachers.component";
 import {PupilsComponent} from "./page/pupils/pupils/pupils.component";
 import {RequestsComponent} from "./page/requests/requests/requests.component";
 import {SettingsComponent} from "./page/settings/settings/settings.component";
+import {RequestApprovalComponent} from "./page/requests/request-approval/request-approval.component";
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -23,6 +24,7 @@ export const routes: Routes = [
             {path: 'teachers', component: TeachersComponent},
             {path: 'pupils', component: PupilsComponent},
             {path: 'requests', component: RequestsComponent},
+            {path: 'requests/:id', component: RequestApprovalComponent},
             {path: 'settings', component: SettingsComponent}
         ]
     },

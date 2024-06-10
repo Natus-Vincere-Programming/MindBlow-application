@@ -1,37 +1,38 @@
 <div class="request-container">
     <div class="request-box">
         <p class="title">Запити на приєднання</p>
-        <mat-divider></mat-divider>
+        <mat-divider class="title-divider"></mat-divider>
         <div class="action-box">
             <div class="action-box-checkbox">
                 <mat-checkbox></mat-checkbox>
-                <button mat-stroked-button disabled>
-                    Дії<mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+                <button mat-stroked-button>
+                    Дії
+                    <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
                 </button>
             </div>
             <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                <mat-label>Знайти людину</mat-label>
+                <mat-label>Знайти по прізвищу</mat-label>
                 <mat-icon matPrefix>search</mat-icon>
-                <input type="text" matInput>
+                <input type="text" matInput [formControl]="startLastnameWith" (blur)="reloadPages()">
                 <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
         </div>
         <mat-action-list>
-            <button mat-list-item>
-                <p matListItemTitle style="margin: 0">Title</p>
-                <p matListItemLine style="margin: 0">Second line</p>
-                <div matListItemMeta>
-                    <mat-icon>arrow_right</mat-icon>
-                </div>
-            </button>
+            <div *ngFor="let user of users; index as i">
+                <button mat-list-item>
+                    <!--<div matListItemIcon
+                         style="display: flex; align-items: center; justify-content: center; justify-items: center">
+                        <mat-checkbox></mat-checkbox>
+                    </div>-->
+                    <p matListItemTitle style="margin: 0" class="list-title">{{user.lastName + " " + user.lastName}}</p>
+                    <p matListItemLine style="margin: 0" class="list-line">{{user.email}}</p>
+                    <div matListItemMeta>
+                        <mat-icon>arrow_right</mat-icon>
+                    </div>
+                </button>
+                <mat-divider *ngIf="i + 1 !== users.length"></mat-divider>
+            </div>
         </mat-action-list>
-        <mat-selection-list #shoes>
-            <mat-list-option>1</mat-list-option>
-            <mat-list-option>2</mat-list-option>
-        </mat-selection-list>
-
-        <p>
-            Options selected: {{shoes.selectedOptions.selected.length}}
-        </p>
+        <button mat-button *ngIf="users.length >= 25 && hasNext" (click)="loadMore()">Завантажити ще</button>
     </div>
 </div>

@@ -8,6 +8,7 @@
 @use "app/page/register/register-pending/register-pending.component.scss" as register-pending-page;
 @use "app/components/navigation/navigation.component.scss" as navigation;
 @use "app/page/requests/requests/requests.component.scss" as requests-page;
+@use "app/page/requests/request-approval/request-approval.component.scss" as request-approval-page;
 
 
 // Note: Color palettes are generated from primary: #525CEB
@@ -164,4 +165,5 @@ $dark-theme: mat.define-theme((
   @include navigation.theme($light-theme);
   @include mat.strong-focus-indicators-theme($light-theme);
   @include requests-page.theme($light-theme);
+  @include request-approval-page.theme($light-theme);
 }

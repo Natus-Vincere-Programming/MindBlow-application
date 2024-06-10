@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 
-.request-container {
+.request-approval-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -14,32 +14,8 @@
   overflow: hidden;
 }
 
-.request-box {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  min-width: 600px;
-  max-width: 700px;
-  width: 600px;
-}
-
-.action-box-checkbox {
-  display: flex;
-  column-gap: 8px;
-}
-
-.action-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.title {
-  margin-bottom: 0;
-}
-
 @mixin color($theme) {
-  .request-container {
+  .request-approval-container {
     background-color: mat.get-theme-color($theme, surface);
   }
   .title-divider {
