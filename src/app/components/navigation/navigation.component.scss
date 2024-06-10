@@ -6,6 +6,7 @@
 }
 
 .sidenav {
+  border-radius: 0;
   width: 360px;
 }
 
@@ -22,16 +23,20 @@
 
 @mixin color($theme) {
   .sidenav {
-    color: mat.get-theme-color($theme, surface);
+    background-color: mat.get-theme-color($theme, surface-container);
   }
-  .title {
-    color: mat.get-theme-color($theme, on-surface-variant)
+  .toolbar {
+    background-color: mat.get-theme-color($theme, surface-container);
+  }
+  .sidenav-content {
+    background-color: mat.get-theme-color($theme, surface-container);
   }
 }
 
 @mixin typography($theme) {
-  .title {
+  .mdc-list-item__primary-text {
     text-decoration: none;
+    color: mat.get-theme-color($theme, on-surface-variant);
     font: mat.get-theme-typography($theme, label-large, font);
   }
 }

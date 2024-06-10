@@ -15,7 +15,8 @@ import {SettingsComponent} from "./page/settings/settings/settings.component";
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
-    {path: 'dashboard', component: DashboardComponent, children: [
+    {
+        path: 'dashboard', component: DashboardComponent, children: [
             {path: '', component: MainComponent},
             {path: 'subjects', component: SubjectsComponent},
             {path: 'planning', component: PlanningComponent},
@@ -23,7 +24,8 @@ export const routes: Routes = [
             {path: 'pupils', component: PupilsComponent},
             {path: 'requests', component: RequestsComponent},
             {path: 'settings', component: SettingsComponent}
-        ]},
+        ]
+    },
     {path: 'register', component: RegisterComponent},
     {path: 'recovery', component: RecoveryComponent},
     {path: '', component: LandingComponent},

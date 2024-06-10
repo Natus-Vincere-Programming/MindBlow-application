@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button aria-label="Іконка меню">
         <mat-icon>menu</mat-icon>
     </button>
@@ -10,7 +10,7 @@
 </mat-toolbar>
 <mat-sidenav-container [autosize]="true" class="sidenav-container">
     <mat-sidenav [opened]="true" mode="side" class="sidenav">
-        <mat-nav-list>
+        <mat-nav-list class="navigation-list">
             <a mat-list-item [activated]="isCurrentRoute('/dashboard')" routerLink="/dashboard">
                 Головна
                 <mat-icon matListItemIcon>home</mat-icon>
@@ -23,7 +23,7 @@
                 Навчальний план
                 <mat-icon matListItemIcon>calendar_today</mat-icon>
             </a>
-            <mat-divider [inset]="true"></mat-divider>
+            <mat-divider></mat-divider>
             <a mat-list-item [activated]="isCurrentRoute('/teachers')" routerLink="/dashboard/teachers">
                 Вчителі
                 <mat-icon matListItemIcon>person_apron</mat-icon>
@@ -43,7 +43,7 @@
             </a>
         </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content class="sidenav-content">
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
