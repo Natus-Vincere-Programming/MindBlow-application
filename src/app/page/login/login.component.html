@@ -20,7 +20,9 @@
                         <mat-error>{{loginErrorHandlers.password.getErrorMessage()}}</mat-error>
                     }
                 </mat-form-field>
-                <a routerLink="/recovery">Забули пароль?</a>
+                <div style="display: inline-block">
+                    <a routerLink="/recovery">Забули пароль?</a>
+                </div>
             </div>
             <mat-checkbox formControlName="rememberMe">Запам'ятати мене</mat-checkbox>
             <div class="buttons">

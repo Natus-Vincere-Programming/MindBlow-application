@@ -4,6 +4,16 @@ import {inject} from "@angular/core";
 
 export const authenticationInterceptor: HttpInterceptorFn = (req, next) => {
     const jwtService = inject(JwtService);
-    req.headers.set('Authorization', 'Bearer ' + jwtService.getAvailableToken());
-    return next(req);
+    let token = jwtService.getAccessToken();
+    if (req.url.endsWith('refresh-token')) {
+        //TODO fix this
+        token = jwtService.getRefreshToken();
+    }
+    if (token === null) next(req);
+    const clonedRequest = req.clone({
+        setHeaders: {
+            Authorization: 'Bearer ' + token,
+        },
+    });
+    return next(clonedRequest);
 };
