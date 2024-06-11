@@ -26,6 +26,7 @@ import {User} from "../../../service/user/users-response";
 import {UserService} from "../../../service/user/user.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {merge} from "rxjs";
+import {RouterLink} from "@angular/router";
 
 @Component({
     selector: 'app-requests',
@@ -58,7 +59,8 @@ import {merge} from "rxjs";
         CdkVirtualForOf,
         CdkVirtualScrollViewport,
         CdkFixedSizeVirtualScroll,
-        NgIf
+        NgIf,
+        RouterLink
     ],
     templateUrl: './requests.component.html',
     styleUrl: './requests.component.scss'

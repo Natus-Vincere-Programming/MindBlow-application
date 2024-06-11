@@ -3,16 +3,48 @@
 
 .request-approval-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
   height: fit-content;
+  flex-direction: column;
+  row-gap: 10px;
   min-height: 100%;
   box-sizing: border-box;
   padding-bottom: 100px;
   border-top-left-radius: 16px;
   overflow: hidden;
 }
+
+.title-container {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.title {
+  margin: 0;
+}
+
+.request-approval-box {
+  border-radius: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 100%;
+  height: auto;
+  padding: 50px 50px;
+  margin-left: 30px;
+  margin-right: 30px;
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+
 
 @mixin color($theme) {
   .request-approval-container {
@@ -21,12 +53,15 @@
   .title-divider {
     border-top-color: mat.get-theme-color($theme, on-surface-variant);
   }
+  .request-approval-box {
+    background-color: mat.get-theme-color($theme, surface-container-low);
+  }
 }
 
 @mixin typography($theme) {
   .title {
     color: mat.get-theme-color($theme, on-surface);
-    font: mat.get-theme-typography($theme, headline-large, font);
+    font: mat.get-theme-typography($theme, title-large, font);
   }
   .list-title {
     color: mat.get-theme-color($theme, on-surface);

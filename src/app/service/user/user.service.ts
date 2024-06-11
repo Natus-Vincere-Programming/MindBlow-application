@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {apiUrl} from "../../utility/storage";
 import {HttpClient} from "@angular/common/http";
 import {UserResponse} from "./user-response";
-import {AuthenticationService} from "../authentication/authentication.service";
 import {JwtService} from "../jwt/jwt.service";
-import {UsersResponse} from "./users-response";
+import {EnableUser, UsersResponse} from "./users-response";
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +13,6 @@ export class UserService {
 
     constructor(
         private http: HttpClient,
-        private authenticationService: AuthenticationService,
         private jwtService: JwtService
     ) {
     }
@@ -60,9 +58,9 @@ export class UserService {
         });
     }
 
-    getUsers(enabled: boolean, pageNumber: number, pageSize: number = 50, startLastnameWith:string = ''): Promise<UsersResponse | null> {
+    getUsers(enabled: boolean, pageNumber: number, pageSize: number = 50, startLastnameWith: string = ''): Promise<UsersResponse | null> {
         return new Promise((resolve) => {
-            this.http.get<UsersResponse>(this.url + "?pageNumber=" + pageNumber + "&pageSize="+ pageSize + "&startLastnameWith=" + startLastnameWith + "&enabled=" + enabled).subscribe({
+            this.http.get<UsersResponse>(this.url + "?pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&startLastnameWith=" + startLastnameWith + "&enabled=" + enabled).subscribe({
                 next: (response: UsersResponse) => {
                     resolve(response);
                 },
@@ -71,5 +69,19 @@ export class UserService {
                 }
             });
         });
+    }
+
+    enableUser(user: EnableUser): Promise<void> {
+        return new Promise((resolve) => {
+            this.http.patch(this.url + "/enable", user).subscribe({
+                next: () => {
+                    resolve();
+                },
+                error: (err) => {
+                    resolve();
+                }
+            });
+        });
+
     }
 }

@@ -19,7 +19,7 @@
         </div>
         <mat-action-list>
             <div *ngFor="let user of users; index as i">
-                <button mat-list-item>
+                <button mat-list-item [routerLink]="'/dashboard/requests/' + user.userId">
                     <!--<div matListItemIcon
                          style="display: flex; align-items: center; justify-content: center; justify-items: center">
                         <mat-checkbox></mat-checkbox>
