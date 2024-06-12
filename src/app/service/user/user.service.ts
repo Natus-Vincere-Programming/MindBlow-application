@@ -3,7 +3,7 @@ import {apiUrl} from "../../utility/storage";
 import {HttpClient} from "@angular/common/http";
 import {UserResponse} from "./user-response";
 import {JwtService} from "../jwt/jwt.service";
-import {EnableUser, UsersResponse} from "./users-response";
+import {EnableUser, User, UsersResponse} from "./users-response";
 
 @Injectable({
     providedIn: 'root'
@@ -84,4 +84,18 @@ export class UserService {
         });
 
     }
+
+  deleteUser(user: User): Promise<void> {
+    return new Promise((resolve) => {
+      this.http.delete(this.url + "/" + user.userId).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (err) => {
+          resolve();
+        }
+      });
+    });
+
+  }
 }

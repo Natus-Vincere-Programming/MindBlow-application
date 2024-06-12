@@ -13,6 +13,7 @@
 }
 
 .sidenav {
+  display: flex;
   border-radius: 0;
   width: 360px;
   height: 100%;
@@ -26,7 +27,7 @@
 }
 
 .spacer {
-  width: 100%;
+  flex: 1 1 auto;
 }
 
 @mixin color($theme) {

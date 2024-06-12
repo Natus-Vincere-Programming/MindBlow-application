@@ -9,7 +9,7 @@
       <mat-icon>person</mat-icon>
     </button>
   </mat-toolbar>
-  <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-container autosize="true" class="sidenav-container">
     <mat-sidenav [opened]="true" mode="side" class="sidenav">
       <mat-nav-list class="navigation-list">
         <a mat-list-item [activated]="isCurrentRoute('/dashboard')" routerLink="/dashboard">
