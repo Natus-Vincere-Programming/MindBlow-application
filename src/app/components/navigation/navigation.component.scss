@@ -5,9 +5,17 @@
   height: 100%;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
 .sidenav {
   border-radius: 0;
   width: 360px;
+  height: 100%;
 }
 
 .logo {
