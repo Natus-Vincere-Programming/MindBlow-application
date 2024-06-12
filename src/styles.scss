@@ -6,8 +6,9 @@
 @use "app/page/register/register.component.scss" as register-page;
 @use "app/page/register/register-pending/register-pending.component.scss" as register-pending-page;
 @use "app/components/navigation/navigation.component.scss" as navigation;
-@use "app/page/requests/requests/requests.component.scss" as requests-page;
+@use "app/page/requests/requests.component" as requests-page;
 @use "app/page/requests/request-approval/request-approval.component.scss" as request-approval-page;
+@use "app/page/pupils/pupils.component" as pupils-page;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -40,6 +41,7 @@ $MindGlow-application-theme: mat.define-theme((
   @include mat.strong-focus-indicators-theme($MindGlow-application-theme);
   @include requests-page.theme($MindGlow-application-theme);
   @include request-approval-page.theme($MindGlow-application-theme);
+  @include pupils-page.theme($MindGlow-application-theme);
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.

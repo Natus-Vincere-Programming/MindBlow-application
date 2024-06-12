@@ -1,47 +1,42 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 
-.request-container {
+.pupils-all-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
   height: fit-content;
+  flex-direction: column;
   min-height: 100%;
   box-sizing: border-box;
-  padding: 20px;
-  border-top-left-radius: 16px;
   overflow: hidden;
+  padding: 10px ;
 }
 
-.request-box {
+.pupils-all-box {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
   min-width: 600px;
   max-width: 700px;
   width: 600px;
+  height: fit-content;
+  box-sizing: border-box;
 }
 
-.action-box-checkbox {
-  display: flex;
-  column-gap: 8px;
-}
-
-.action-box {
+.pupils-all-action-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  column-gap: 12px;
 }
 
-.title {
-  margin-bottom: 0;
+.spacer {
+  flex: 1 1 auto;
 }
 
 @mixin color($theme) {
-  .request-container {
-    background-color: mat.get-theme-color($theme, surface);
-  }
   .title-divider {
     border-top-color: mat.get-theme-color($theme, on-surface-variant);
   }
@@ -51,14 +46,6 @@
   .title {
     color: mat.get-theme-color($theme, on-surface);
     font: mat.get-theme-typography($theme, headline-large, font);
-  }
-  .list-title {
-    color: mat.get-theme-color($theme, on-surface);
-    font: mat.get-theme-typography($theme, body-large, font);
-  }
-  .list-line {
-    color: mat.get-theme-color($theme, on-surface-variant);
-    font: mat.get-theme-typography($theme, body-medium, font);
   }
 }
 

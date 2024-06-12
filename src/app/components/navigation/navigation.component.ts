@@ -39,6 +39,9 @@ export class NavigationComponent {
     }
 
     isCurrentRoute(route: string): boolean {
-        return this.router.url.endsWith(route);
+      if (route.endsWith('/**')){
+        return this.router.url.startsWith(route.replace('/**', ''));
+      }
+      return this.router.url === route;
     }
 }

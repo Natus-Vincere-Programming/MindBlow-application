@@ -9,10 +9,13 @@ import {MainComponent} from "./page/main/main/main.component";
 import {SubjectsComponent} from "./page/subjects/subjects/subjects.component";
 import {PlanningComponent} from "./page/planning/planning/planning.component";
 import {TeachersComponent} from "./page/teachers/teachers/teachers.component";
-import {PupilsComponent} from "./page/pupils/pupils/pupils.component";
-import {RequestsComponent} from "./page/requests/requests/requests.component";
+import {PupilsComponent} from "./page/pupils/pupils.component";
+import {RequestsComponent} from "./page/requests/requests.component";
 import {SettingsComponent} from "./page/settings/settings/settings.component";
 import {RequestApprovalComponent} from "./page/requests/request-approval/request-approval.component";
+import {PupilsAllComponent} from "./page/pupils/pupils-all/pupils-all.component";
+import {PupilsSubjectsComponent} from "./page/pupils/pupils-subjects/pupils-subjects.component";
+import {PupilsTeachersComponent} from "./page/pupils/pupils-teachers/pupils-teachers.component";
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -22,7 +25,11 @@ export const routes: Routes = [
             {path: 'subjects', component: SubjectsComponent},
             {path: 'planning', component: PlanningComponent},
             {path: 'teachers', component: TeachersComponent},
-            {path: 'pupils', component: PupilsComponent},
+            {path: 'pupils', component: PupilsComponent, children: [
+                {path: '', component: PupilsAllComponent},
+                {path: 'subjects', component: PupilsSubjectsComponent},
+                {path: 'teachers', component: PupilsTeachersComponent},
+              ]},
             {path: 'requests', component: RequestsComponent},
             {path: 'requests/:id', component: RequestApprovalComponent},
             {path: 'settings', component: SettingsComponent}
