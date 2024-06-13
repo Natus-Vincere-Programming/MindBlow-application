@@ -25,10 +25,10 @@ export class RegisterPendingComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const user = this.userService.getUser();
+        const user = this.userService.getUserByToken();
         user.then(response => {
             if (response === null) return;
-            this.email = response.email;
+            this.email = response.email ?? "";
             if (response.enabled) {
                 this.router.navigate(['dashboard']);
             }

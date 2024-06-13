@@ -15,7 +15,6 @@ import {
   Validator,
   Validators
 } from "@angular/forms";
-import {User} from "../../../service/user/users-response";
 import {UserService} from "../../../service/user/user.service";
 import {MatFormField, MatLabel, MatPrefix} from "@angular/material/form-field";
 import {MatInput, MatInputModule} from "@angular/material/input";
@@ -31,6 +30,7 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatDialog} from "@angular/material/dialog";
 import {RequestDeleteConfirmComponent} from "./request-delete-confirm/request-delete-confirm.component";
+import {UserResponse} from "../../../service/user/response/user.response";
 
 @Component({
   selector: 'app-request-approval',
@@ -63,7 +63,7 @@ import {RequestDeleteConfirmComponent} from "./request-delete-confirm/request-de
   styleUrl: './request-approval.component.scss'
 })
 export class RequestApprovalComponent implements OnInit {
-  user?: User
+  user?: UserResponse
   validator: Validator = new RoleValidator();
   options: string[] = ['Студент', 'Вчитель'];
   request: FormGroup = new FormGroup({
@@ -113,14 +113,14 @@ export class RequestApprovalComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id === null) return;
-    this.userService.getUserById(id).then(user => {
-      if (user === null) return;
-      this.user = user;
+    this.userService.getUserById(id).then(response => {
+      if (response === null) return;
+      this.user = response;
       const {role, email, firstName, lastName} = this.request.controls;
       role.setValue(this.user?.role === 'TEACHER' ? 'Вчитель' : 'Студент');
       email.setValue(this.user?.email);
-      firstName.setValue(this.user?.firstName);
-      lastName.setValue(this.user?.lastName);
+      firstName.setValue(this.user?.firstname);
+      lastName.setValue(this.user?.lastname);
     });
   }
 
@@ -132,11 +132,13 @@ export class RequestApprovalComponent implements OnInit {
     const {firstName, lastName, role, email} = this.request.controls;
     const userId: string | null = this.route.snapshot.paramMap.get('id');
     if (userId === null) return;
-    this.userService.enableUser({
+    this.userService.putUser({
       id: userId,
-      firstName: firstName.value,
-      lastName: lastName.value,
-      role: role.value === 'Вчитель' ? 'TEACHER' : 'STUDENT'
+      email: email.value,
+      firstname: firstName.value,
+      lastname: lastName.value,
+      role: role.value === 'Вчитель' ? 'TEACHER' : 'STUDENT',
+      enabled: true
     }).then(() => {
       this.location.back();
     });

@@ -20,13 +20,10 @@ import {MatInput} from "@angular/material/input";
 import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatGridList} from "@angular/material/grid-list";
 import {NgForOf, NgIf} from "@angular/common";
-import {ScrollNearEndDirective} from "../../directive/scroll-near-end.directive";
 import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
-import {User} from "../../service/user/users-response";
 import {UserService} from "../../service/user/user.service";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {merge} from "rxjs";
 import {RouterLink} from "@angular/router";
+import {UserResponse} from "../../service/user/response/user.response";
 
 @Component({
     selector: 'app-requests',
@@ -54,7 +51,6 @@ import {RouterLink} from "@angular/router";
         MatSelectionList,
         MatListOption,
         NgForOf,
-        ScrollNearEndDirective,
         MatListItemAvatar,
         CdkVirtualForOf,
         CdkVirtualScrollViewport,
@@ -68,9 +64,9 @@ import {RouterLink} from "@angular/router";
 export class RequestsComponent implements OnInit {
 
     hasNext: boolean = true;
-    users: User[] = [];
+    users: UserResponse[] = [];
     currentPage: number = 0;
-    startLastnameWith: FormControl = new FormControl('');
+    startWith: FormControl = new FormControl('');
 
     constructor(private userService: UserService) {
 
@@ -92,7 +88,7 @@ export class RequestsComponent implements OnInit {
     }
 
     private getUsers() {
-        this.userService.getUsers(false, this.currentPage, 50, this.startLastnameWith.value).then((response) => {
+        this.userService.getUsersWithPagination(false, this.startWith.value, this.currentPage, 50).then((response) => {
             this.currentPage++;
             this.hasNext = response?.hasNext ?? false;
             if (response === null) return;

@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -32,17 +32,25 @@ import {UserResponse} from "../../../../service/user/response/user.response";
     CdkTrapFocus,
     RouterLink,
   ],
-  templateUrl: './request-delete-confirm.component.html',
-  styleUrl: './request-delete-confirm.component.scss'
+  templateUrl: './pupil-delete-confirm.component.html',
+  styleUrl: './pupil-delete-confirm.component.scss'
 })
-export class RequestDeleteConfirmComponent {
+export class PupilDeleteConfirmComponent implements OnInit{
+  user?: UserResponse
   constructor(
-    public dialogRef: MatDialogRef<RequestDeleteConfirmComponent>,
+    public dialogRef: MatDialogRef<PupilDeleteConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RequestDeleteConfirmData,
     private userService: UserService,
     private location: Location
   ) {
   }
+
+  ngOnInit(): void {
+        this.userService.getUserById(this.data.user.id).then(response => {
+          if (response === null) return;
+          this.user = response;
+        });
+    }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -51,7 +59,6 @@ export class RequestDeleteConfirmComponent {
   deleteUser() {
     this.userService.deleteUser(this.data.user).then(() => {
       this.dialogRef.close();
-      this.location.back();
     });
   }
 }

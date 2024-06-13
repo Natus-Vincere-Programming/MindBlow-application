@@ -15,7 +15,7 @@ export class RedirectService {
 
     checkAuthorization(): Promise<boolean> {
         return new Promise<boolean>((resolve) => {
-            const user = this.userService.getUserAsync();
+            const user = this.userService.getUserByTokenAsync();
             user.then(response => {
                 if (response === null) {
                     this.router.navigate(['login']).then(() => {
