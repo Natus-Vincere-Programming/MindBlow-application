@@ -6,6 +6,7 @@ import {PupilsResponse} from "./response/pupils.response";
 import {UserResponse} from "./response/user.response";
 import {UsersResponse} from "./response/users.response";
 import {UserRequest} from "./request/user.request";
+import {TeachersResponse} from "./response/teachers.response";
 
 @Injectable({
   providedIn: 'root'
@@ -124,6 +125,45 @@ export class UserService {
     return new Promise((resolve) => {
       this.http.get<PupilsResponse>(this.url + "/pupils" + "?pagination=true" + "&page=" + page + "&size=" + size + "&enabled=" + enabled).subscribe({
         next: (response: PupilsResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  getTeachersWithPaginationAndStartWith(enabled: boolean = true, startWith: string = '', page: number, size: number = 50): Promise<TeachersResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<TeachersResponse>(this.url + "/teachers" + "?pagination=true" + "&page=" + page + "&size=" + size + "&startWith=" + startWith + "&enabled=" + enabled).subscribe({
+        next: (response: TeachersResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  getTeachersWithPagination(enabled: boolean = true, page: number, size: number = 50): Promise<TeachersResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<TeachersResponse>(this.url + "/teachers" + "?pagination=true" + "&page=" + page + "&size=" + size + "&enabled=" + enabled).subscribe({
+        next: (response: TeachersResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  getTeachers(enabled: boolean = true): Promise<TeachersResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<TeachersResponse>(this.url + "/teachers" + "?enabled=" + enabled).subscribe({
+        next: (response: TeachersResponse) => {
           resolve(response);
         },
         error: (err) => {

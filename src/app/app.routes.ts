@@ -6,7 +6,7 @@ import {LoginComponent} from "./page/login/login.component";
 import {RegisterComponent} from "./page/register/register.component";
 import {RegisterPendingComponent} from "./page/register/register-pending/register-pending.component";
 import {MainComponent} from "./page/main/main/main.component";
-import {SubjectsComponent} from "./page/subjects/subjects/subjects.component";
+import {SubjectsComponent} from "./page/subjects/subjects.component";
 import {PlanningComponent} from "./page/planning/planning/planning.component";
 import {TeachersComponent} from "./page/teachers/teachers/teachers.component";
 import {PupilsComponent} from "./page/pupils/pupils.component";

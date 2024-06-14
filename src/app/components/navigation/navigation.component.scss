@@ -40,6 +40,9 @@
   .sidenav-content {
     background-color: mat.get-theme-color($theme, surface-container);
   }
+  .account-menu {
+    background-color: mat.get-theme-color($theme, surface-container-highest);
+  }
 }
 
 @mixin typography($theme) {
