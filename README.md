@@ -1,27 +1,12 @@
-# MindGlowApplication
+# Запуск сайту (Windows)
+**Перед запуском обов'язково включіть бекенд частину**
+1. Завантажте Node.js за [посиланням](https://nodejs.org/en)
+2. Виконайте в терміналі команду `npm install -g angular-http-server`
+3. Завантажити `mind-glow-application-v0.0.?` за [посиланням](https://github.com/Natus-Vincere-Programming/MindGlow-application/releases) (версія сайту і бекенду має співпадати!!!)
+4. Розпакувати і пройти по такому шляху (де знаходиться index.html) ![image](https://github.com/Natus-Vincere-Programming/MindGlow-application/assets/113195769/243ee096-09fd-4b23-b726-013954fee1d0)
+5. Вписати в шлях `cmd` і натиснути Enter ![image](https://github.com/Natus-Vincere-Programming/MindGlow-application/assets/113195769/b1ba5144-30e8-4e04-95bd-e8f3f900bff1)
+6. Відкриється термінал з шляхом до index.html ![image](https://github.com/Natus-Vincere-Programming/MindGlow-application/assets/113195769/93d5ed4a-bbd8-4dd4-a42c-8f1722a914db)
+7. В цьому ж терміналі написати команду `angular-http-server -p 4200`
+8. Сайт доступний за [посиланням](http://localhost:4200) (localhost:4200)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
