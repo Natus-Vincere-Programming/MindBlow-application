@@ -65,7 +65,7 @@ export class SubjectsComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(SubjectCreateComponent);
     dialogRef.afterClosed().subscribe(result => {
-      if (result === null) return;
+      if (result === null || result === undefined) return;
       this.subjects.push(result);
     });
   }

@@ -188,7 +188,7 @@ export class UserService {
 
   changePassword(currentPassword: string, newPassword: string, confirmationPassword: string): Promise<boolean> {
     return new Promise((resolve) => {
-      this.http.patch(this.url + "/password", {
+      this.http.patch(this.url, {
         currentPassword: currentPassword,
         newPassword: newPassword,
         confirmationPassword: confirmationPassword
