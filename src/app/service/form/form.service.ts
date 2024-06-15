@@ -3,6 +3,7 @@ import {AuthenticationService} from "../authentication/authentication.service";
 import {AuthenticationResponse} from "../authentication/authentication.response";
 import {JwtService} from "../jwt/jwt.service";
 import {Router} from "@angular/router";
+import {UserService} from "../user/user.service";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,8 @@ export class FormService {
     constructor(
         private authenticationService: AuthenticationService,
         private jwtService: JwtService,
-        private router: Router
+        private router: Router,
+        private userService: UserService
     ) {
     }
 
@@ -44,7 +46,20 @@ export class FormService {
                     return;
                 }
                 this.jwtService.saveTokens(response.access_token, response.refresh_token);
-                this.router.navigate(['dashboard']).then(() => resolve(true));
+                this.userService.getUserByToken().then(response => {
+                  if (response === null) return;
+                  if (!response.enabled) {
+                      this.router.navigate(['pending']);
+                      resolve(true)
+                      return;
+                  }
+                  if (response.firstLogin === true) {
+                      this.router.navigate(['credentials']);
+                      resolve(true)
+                      return;
+                  }
+                  this.router.navigate(['dashboard']).then(() => resolve(true));
+                });
             });
         });
     }

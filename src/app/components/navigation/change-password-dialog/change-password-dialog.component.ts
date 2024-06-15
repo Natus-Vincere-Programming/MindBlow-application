@@ -31,6 +31,8 @@ import {SubjectService} from "../../../service/subject/subject.service";
 import {MatIcon} from "@angular/material/icon";
 import {merge} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {AuthenticationService} from "../../../service/authentication/authentication.service";
+import {JwtService} from "../../../service/jwt/jwt.service";
 
 @Component({
   selector: 'app-request-delete-confirm',
@@ -71,11 +73,14 @@ export class ChangePasswordDialogComponent implements OnInit {
     confirmPassword: new ErrorMessageHandler('Підтвердіть новий пароль', '', 'Паролі не співпадають'),
   }
   hidePassword: boolean = true;
+  user?: UserResponse;
 
   constructor(
     public dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
     private userService: UserService,
-    private location: Location
+    private location: Location,
+    private authenticationService: AuthenticationService,
+    private jwtService: JwtService,
   ) {
     const {newPassword, confirmPassword, currentPassword} = this.changePasswordFormGroup.controls;
     const confirmPasswordValidator = new ConfirmPasswordValidator(newPassword);
@@ -92,6 +97,10 @@ export class ChangePasswordDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userService.getUserByToken().then(response => {
+      if (response === null) return;
+      this.user = response;
+    });
   }
 
   clickEvent(event: MouseEvent) {
@@ -116,7 +125,12 @@ export class ChangePasswordDialogComponent implements OnInit {
       confirmPassword.value
     ).then(response => {
       if (response){
-        this.dialogRef.close();
+        if (this.user?.email === undefined) return;
+        this.authenticationService.authenticate(this.user.email, newPassword.value, true).then(response => {
+          if (response === null) return;
+          this.jwtService.saveTokens(response.access_token, response.refresh_token);
+          this.dialogRef.close();
+        });
       } else this.changePasswordFormGroup.markAsTouched();
     })
   }

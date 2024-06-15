@@ -18,7 +18,7 @@ import {RouterLink} from "@angular/router";
 import {UserResponse} from "../../../../service/user/response/user.response";
 
 @Component({
-  selector: 'app-request-delete-confirm',
+  selector: 'teacher-delete-confirmation',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -32,13 +32,13 @@ import {UserResponse} from "../../../../service/user/response/user.response";
     CdkTrapFocus,
     RouterLink,
   ],
-  templateUrl: './pupil-delete-confirm.component.html',
-  styleUrl: './pupil-delete-confirm.component.scss'
+  templateUrl: './teacher-delete-confirm.component.html',
+  styleUrl: './teacher-confirm.component.scss'
 })
-export class PupilDeleteConfirmComponent implements OnInit{
+export class TeacherDeleteConfirmComponent implements OnInit{
   user?: UserResponse
   constructor(
-    public dialogRef: MatDialogRef<PupilDeleteConfirmComponent>,
+    public dialogRef: MatDialogRef<TeacherDeleteConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RequestDeleteConfirmData,
     private userService: UserService
   ) {

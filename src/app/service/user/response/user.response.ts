@@ -5,4 +5,5 @@ export interface UserResponse {
   lastname?: string;
   role?: string;
   enabled?: boolean;
+  firstLogin?: boolean;
 }
