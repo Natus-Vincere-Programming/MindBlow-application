@@ -15,6 +15,8 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {response} from "express";
 import {JwtService} from "../../service/jwt/jwt.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ChangePasswordDialogComponent} from "./change-password-dialog/change-password-dialog.component";
 
 @Component({
   selector: 'app-navigation',
@@ -52,7 +54,8 @@ export class NavigationComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private authenticationService: AuthenticationService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    public dialog: MatDialog
     ) {
   }
 
@@ -83,6 +86,10 @@ export class NavigationComponent implements OnInit {
       this.jwtService.removeTokens();
       this.router.navigate(['/login']);
     })
+  }
+
+  openDialog() {
+    this.dialog.open(ChangePasswordDialogComponent)
   }
 }
 

@@ -134,6 +134,19 @@ export class UserService {
     });
   }
 
+  getPupils(enabled: boolean = true): Promise<PupilsResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<PupilsResponse>(this.url + "/pupils" + "?enabled=" + enabled).subscribe({
+        next: (response: PupilsResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
   getTeachersWithPaginationAndStartWith(enabled: boolean = true, startWith: string = '', page: number, size: number = 50): Promise<TeachersResponse | null> {
     return new Promise((resolve) => {
       this.http.get<TeachersResponse>(this.url + "/teachers" + "?pagination=true" + "&page=" + page + "&size=" + size + "&startWith=" + startWith + "&enabled=" + enabled).subscribe({
@@ -168,6 +181,23 @@ export class UserService {
         },
         error: (err) => {
           resolve(null);
+        }
+      });
+    });
+  }
+
+  changePassword(currentPassword: string, newPassword: string, confirmationPassword: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.http.patch(this.url + "/password", {
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+        confirmationPassword: confirmationPassword
+      }).subscribe({
+        next: () => {
+          resolve(true)
+        },
+        error: (err) => {
+          resolve(false);
         }
       });
     });

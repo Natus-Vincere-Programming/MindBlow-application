@@ -9,6 +9,8 @@
 @use "app/page/requests/request-approval/request-approval.component.scss" as request-approval-page;
 @use "app/page/pupils/pupils.component" as pupils-page;
 @use "app/page/subjects/subjects.component" as subjects-page;
+@use "app/page/subjects/subject-overview/subject-overview-main/subject-overview-main.component.scss" as subject-overview-main;
+@use "app/page/subjects/subject-overview/subject-overview-pupils/subject-overview-pupils.component.scss" as subject-overview-pupils;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -43,6 +45,8 @@ $MindGlow-application-theme: mat.define-theme((
   @include request-approval-page.theme($MindGlow-application-theme);
   @include pupils-page.theme($MindGlow-application-theme);
   @include subjects-page.theme($MindGlow-application-theme);
+  @include subject-overview-main.theme($MindGlow-application-theme);
+  @include subject-overview-pupils.theme($MindGlow-application-theme);
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.

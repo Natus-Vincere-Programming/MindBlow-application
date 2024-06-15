@@ -17,6 +17,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
 import {PupilDeleteConfirmComponent} from "../pupils/pupils-all/pupil-delete-confirm/pupil-delete-confirm.component";
 import {SubjectCreateComponent} from "./subject-create/subject-create.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-subjects',
@@ -34,7 +35,8 @@ import {SubjectCreateComponent} from "./subject-create/subject-create.component"
     MatIconButton,
     MatCardAvatar,
     NgForOf,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './subjects.component.html',
   styleUrl: './subjects.component.scss'

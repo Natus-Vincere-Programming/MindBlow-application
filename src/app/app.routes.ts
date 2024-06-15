@@ -16,27 +16,38 @@ import {RequestApprovalComponent} from "./page/requests/request-approval/request
 import {PupilsAllComponent} from "./page/pupils/pupils-all/pupils-all.component";
 import {PupilsSubjectsComponent} from "./page/pupils/pupils-subjects/pupils-subjects.component";
 import {PupilsTeachersComponent} from "./page/pupils/pupils-teachers/pupils-teachers.component";
+import {SubjectOverviewComponent} from "./page/subjects/subject-overview/subject-overview.component";
+import {SubjectOverviewMainComponent} from "./page/subjects/subject-overview/subject-overview-main/subject-overview-main.component";
+import {
+  SubjectOverviewPupilsComponent
+} from "./page/subjects/subject-overview/subject-overview-pupils/subject-overview-pupils.component";
 
 export const routes: Routes = [
-    {path: 'login', component: LoginComponent},
-    {
-        path: 'dashboard', component: DashboardComponent, children: [
-            {path: '', component: MainComponent},
-            {path: 'subjects', component: SubjectsComponent},
-            {path: 'planning', component: PlanningComponent},
-            {path: 'teachers', component: TeachersComponent},
-            {path: 'pupils', component: PupilsComponent, children: [
-                {path: '', component: PupilsAllComponent},
-                {path: 'subjects', component: PupilsSubjectsComponent},
-                {path: 'teachers', component: PupilsTeachersComponent},
-              ]},
-            {path: 'requests', component: RequestsComponent},
-            {path: 'requests/:id', component: RequestApprovalComponent},
-            {path: 'settings', component: SettingsComponent}
+  {path: 'login', component: LoginComponent},
+  {
+    path: 'dashboard', component: DashboardComponent, children: [
+      {path: '', component: MainComponent},
+      {path: 'subjects', component: SubjectsComponent},
+      {path: 'subjects/:id', component: SubjectOverviewComponent, children: [
+          {path: '', component: SubjectOverviewMainComponent},
+          {path: 'pupils', component: SubjectOverviewPupilsComponent}
+        ]},
+      {path: 'planning', component: PlanningComponent},
+      {path: 'teachers', component: TeachersComponent},
+      {
+        path: 'pupils', component: PupilsComponent, children: [
+          {path: '', component: PupilsAllComponent},
+          {path: 'subjects', component: PupilsSubjectsComponent},
+          {path: 'teachers', component: PupilsTeachersComponent},
         ]
-    },
-    {path: 'register', component: RegisterComponent},
-    {path: 'recovery', component: RecoveryComponent},
-    {path: '', component: LandingComponent},
-    {path: 'pending', component: RegisterPendingComponent}
+      },
+      {path: 'requests', component: RequestsComponent},
+      {path: 'requests/:id', component: RequestApprovalComponent},
+      {path: 'settings', component: SettingsComponent}
+    ]
+  },
+  {path: 'register', component: RegisterComponent},
+  {path: 'recovery', component: RecoveryComponent},
+  {path: '', component: LandingComponent},
+  {path: 'pending', component: RegisterPendingComponent}
 ];
