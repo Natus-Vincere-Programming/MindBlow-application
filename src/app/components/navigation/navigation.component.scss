@@ -5,9 +5,18 @@
   height: 100%;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
 .sidenav {
+  display: flex;
   border-radius: 0;
   width: 360px;
+  height: 100%;
 }
 
 .logo {
@@ -18,7 +27,7 @@
 }
 
 .spacer {
-  width: 100%;
+  flex: 1 1 auto;
 }
 
 @mixin color($theme) {
@@ -30,6 +39,9 @@
   }
   .sidenav-content {
     background-color: mat.get-theme-color($theme, surface-container);
+  }
+  .account-menu {
+    background-color: mat.get-theme-color($theme, surface-container-highest);
   }
 }
 

@@ -10,6 +10,7 @@ export const forbiddenAuthenticationInterceptor: HttpInterceptorFn = (req, next)
     return next(req).pipe(catchError((error: HttpErrorResponse) => {
         if (error.status === 403) {
             const jwtService = inject(JwtService);
+            //TODO Після inject(JWTService) далі код не працює і токени не поновлюються
             const authenticationService = inject(AuthenticationService);
             const redirectService = inject(RedirectService);
             const router = inject(Router);

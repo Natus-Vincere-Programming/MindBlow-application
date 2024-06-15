@@ -1,87 +1,205 @@
 import {Injectable} from '@angular/core';
 import {apiUrl} from "../../utility/storage";
 import {HttpClient} from "@angular/common/http";
-import {UserResponse} from "./user-response";
 import {JwtService} from "../jwt/jwt.service";
-import {EnableUser, UsersResponse} from "./users-response";
+import {PupilsResponse} from "./response/pupils.response";
+import {UserResponse} from "./response/user.response";
+import {UsersResponse} from "./response/users.response";
+import {UserRequest} from "./request/user.request";
+import {TeachersResponse} from "./response/teachers.response";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class UserService {
-    url: string = apiUrl + '/users';
+  url: string = apiUrl + '/users';
 
-    constructor(
-        private http: HttpClient,
-        private jwtService: JwtService
-    ) {
-    }
+  constructor(
+    private http: HttpClient,
+    private jwtService: JwtService
+  ) {
+  }
 
-    getUser(): Promise<UserResponse | null> {
-        return new Promise((resolve) => {
-            this.http.get<UserResponse>(this.url + "/" + this.jwtService.getAccessToken()).subscribe({
-                next: (response: UserResponse) => {
-                    resolve(response);
-                },
-                error: (err) => {
-                    resolve(null);
-                }
-            });
+  /**
+   * Повертає користувача за токеном навіть якщо його акаунт не активовано
+   */
+  getUserByToken(): Promise<UserResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<UserResponse>(this.url + "/token/" + this.jwtService.getAccessToken()).subscribe({
+        next: (response: UserResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  getUserById(id: string): Promise<UserResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<UserResponse>(this.url + "/id/" + id).subscribe({
+        next: (response: UserResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  /**
+   * Повертає користувача за токеном навіть якщо його акаунт не активовано
+   */
+  getUserByTokenAsync(): Promise<UserResponse | null> {
+    return new Promise((resolve) => {
+      this.jwtService.getAccessTokenAsync().then((token) => {
+        this.http.get<UserResponse>(this.url + "/token/" + token).subscribe({
+          next: (response: UserResponse) => {
+            resolve(response);
+          },
+          error: (err) => {
+            resolve(null);
+          }
         });
-    }
+      });
+    });
+  }
 
-    getUserById(id: string): Promise<UserResponse | null> {
-        return new Promise((resolve) => {
-            this.http.get<UserResponse>(this.url + "/id?id=" + id).subscribe({
-                next: (response: UserResponse) => {
-                    resolve(response);
-                },
-                error: (err) => {
-                    resolve(null);
-                }
-            });
-        });
-    }
+  getUsersWithPagination(enabled: boolean = true, startWith: string = '', page: number, size: number = 50): Promise<UsersResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<UsersResponse>(this.url + "?pagination=true" + "&page=" + page + "&size=" + size + "&startWith=" + startWith + "&enabled=" + enabled).subscribe({
+        next: (response: UsersResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
 
-    getUserAsync(): Promise<UserResponse | null> {
-        return new Promise((resolve) => {
-            this.jwtService.getAccessTokenAsync().then((token) => {
-                this.http.get<UserResponse>(this.url + "/" + token).subscribe({
-                    next: (response: UserResponse) => {
-                        resolve(response);
-                    },
-                    error: (err) => {
-                        resolve(null);
-                    }
-                });
-            });
-        });
-    }
+  putUser(user: UserRequest): Promise<void> {
+    return new Promise((resolve) => {
+      this.http.put(this.url, user).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (err) => {
+          resolve();
+        }
+      });
+    });
 
-    getUsers(enabled: boolean, pageNumber: number, pageSize: number = 50, startLastnameWith: string = ''): Promise<UsersResponse | null> {
-        return new Promise((resolve) => {
-            this.http.get<UsersResponse>(this.url + "?pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&startLastnameWith=" + startLastnameWith + "&enabled=" + enabled).subscribe({
-                next: (response: UsersResponse) => {
-                    resolve(response);
-                },
-                error: (err) => {
-                    resolve(null);
-                }
-            });
-        });
-    }
+  }
 
-    enableUser(user: EnableUser): Promise<void> {
-        return new Promise((resolve) => {
-            this.http.patch(this.url + "/enable", user).subscribe({
-                next: () => {
-                    resolve();
-                },
-                error: (err) => {
-                    resolve();
-                }
-            });
-        });
+  deleteUser(user: UserResponse): Promise<void> {
+    return new Promise((resolve) => {
+      this.http.delete(this.url + "/" + user.id).subscribe({
+        next: () => {
+          resolve();
+        },
+        error: (err) => {
+          resolve();
+        }
+      });
+    });
 
-    }
+  }
+
+  getPupilsWithPaginationAndStartWith(enabled: boolean = true, startWith: string = '', page: number, size: number = 50): Promise<PupilsResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<PupilsResponse>(this.url + "/pupils" + "?pagination=true" + "&page=" + page + "&size=" + size + "&startWith=" + startWith + "&enabled=" + enabled).subscribe({
+        next: (response: PupilsResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  getPupilsWithPagination(enabled: boolean = true, page: number, size: number = 50): Promise<PupilsResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<PupilsResponse>(this.url + "/pupils" + "?pagination=true" + "&page=" + page + "&size=" + size + "&enabled=" + enabled).subscribe({
+        next: (response: PupilsResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  getPupils(enabled: boolean = true): Promise<PupilsResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<PupilsResponse>(this.url + "/pupils" + "?enabled=" + enabled).subscribe({
+        next: (response: PupilsResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  getTeachersWithPaginationAndStartWith(enabled: boolean = true, startWith: string = '', page: number, size: number = 50): Promise<TeachersResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<TeachersResponse>(this.url + "/teachers" + "?pagination=true" + "&page=" + page + "&size=" + size + "&startWith=" + startWith + "&enabled=" + enabled).subscribe({
+        next: (response: TeachersResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  getTeachersWithPagination(enabled: boolean = true, page: number, size: number = 50): Promise<TeachersResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<TeachersResponse>(this.url + "/teachers" + "?pagination=true" + "&page=" + page + "&size=" + size + "&enabled=" + enabled).subscribe({
+        next: (response: TeachersResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  getTeachers(enabled: boolean = true): Promise<TeachersResponse | null> {
+    return new Promise((resolve) => {
+      this.http.get<TeachersResponse>(this.url + "/teachers" + "?enabled=" + enabled).subscribe({
+        next: (response: TeachersResponse) => {
+          resolve(response);
+        },
+        error: (err) => {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  changePassword(currentPassword: string, newPassword: string, confirmationPassword: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.http.patch(this.url, {
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+        confirmationPassword: confirmationPassword
+      }).subscribe({
+        next: () => {
+          resolve(true)
+        },
+        error: (err) => {
+          resolve(false);
+        }
+      });
+    });
+  }
 }
