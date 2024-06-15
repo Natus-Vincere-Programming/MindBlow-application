@@ -15,7 +15,7 @@
         <input type="text" matInput (blur)="reloadPages()" [formControl]="startWith">
         <mat-icon matSuffix>mode_edit</mat-icon>
       </mat-form-field>
-      <button mat-icon-button *ngIf="this.user?.role === 'ADMIN'">
+      <button mat-icon-button *ngIf="this.user?.role === 'ADMIN'" disabled>
         <mat-icon>person_add</mat-icon>
       </button>
     </div>

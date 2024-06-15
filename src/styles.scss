@@ -12,6 +12,9 @@
 @use "app/page/subjects/subject-overview/subject-overview-main/subject-overview-main.component.scss" as subject-overview-main;
 @use "app/page/subjects/subject-overview/subject-overview-pupils/subject-overview-pupils.component.scss" as subject-overview-pupils;
 @use "app/page/credentials/credentials.component.scss" as credentials-page;
+@use "app/page/pupils/pupils-subjects/pupils-subjects.component.scss" as pupils-subjects;
+@use "app/page/pupils/pupils-teachers/pupils-teachers.component.scss" as pupils-teachers;
+@use "app/page/teachers/teachers/teachers.component.scss" as teachers-page;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -49,6 +52,9 @@ $MindGlow-application-theme: mat.define-theme((
   @include subject-overview-main.theme($MindGlow-application-theme);
   @include subject-overview-pupils.theme($MindGlow-application-theme);
   @include credentials-page.theme($MindGlow-application-theme);
+  @include pupils-subjects.theme($MindGlow-application-theme);
+  @include pupils-teachers.theme($MindGlow-application-theme);
+  @include teachers-page.theme($MindGlow-application-theme);
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.

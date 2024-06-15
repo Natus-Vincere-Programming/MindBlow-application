@@ -11,7 +11,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
-  Validator
+  Validator, Validators
 } from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
 import {UserResponse} from "../../service/user/response/user.response";
@@ -46,17 +46,20 @@ import {JwtService} from "../../service/jwt/jwt.service";
 export class CredentialsComponent implements OnInit {
   user?: UserResponse;
   credentialsForm: FormGroup = new FormGroup({
-    email: new FormControl(''),
-    lastName: new FormControl(''),
-    firstName: new FormControl(''),
-    password: new FormControl(''),
-    confirmPassword: new FormControl('')
+    email: new FormControl('', [Validators.required, Validators.email]),
+    lastName: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    confirmPassword: new FormControl('', {
+      validators: [Validators.required],
+      updateOn: 'blur'
+    })
   });
   credentialsErrorHandlers: CredentialsErrorHandlers = {
     email: new ErrorMessageHandler('Введіть пошту', 'Некоректна пошта', ''),
-    lastName: new ErrorMessageHandler('Введіть прізвище', '', 'I'),
+    lastName: new ErrorMessageHandler('Введіть прізвище', '', ''),
     firstName: new ErrorMessageHandler("Введіть ім'я", '', ''),
-    password: new ErrorMessageHandler('Введіть пароль', '', ''),
+    password: new ErrorMessageHandler('Введіть пароль', '', 'Пароль має бути більше 8 символів'),
     confirmPassword: new ErrorMessageHandler('Підтвердіть пароль', '', 'Паролі не співпадають')
   };
   hidePassword: boolean = true;
