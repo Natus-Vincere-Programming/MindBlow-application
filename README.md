@@ -9,5 +9,8 @@
 7. Відкриється термінал з шляхом до index.html ![image](https://github.com/Natus-Vincere-Programming/MindGlow-application/assets/113195769/93d5ed4a-bbd8-4dd4-a42c-8f1722a914db)
 8. В цьому ж терміналі написати команду `angular-http-server -p 4200`
 9. Сайт доступний за [посиланням](http://localhost:4200) (localhost:4200)
+10. ПЕРШИЙ ВХІД ВІД АДМІНА
+      - Електронна адреса: admin@mail.com
+      - Пароль: password
 
 
