@@ -7,6 +7,7 @@ import {UserResponse} from "./response/user.response";
 import {UsersResponse} from "./response/users.response";
 import {UserRequest} from "./request/user.request";
 import {TeachersResponse} from "./response/teachers.response";
+import {ChangeCredentialsRequest} from "./request/change-credentials.request";
 
 @Injectable({
   providedIn: 'root'
@@ -193,6 +194,19 @@ export class UserService {
         newPassword: newPassword,
         confirmationPassword: confirmationPassword
       }).subscribe({
+        next: () => {
+          resolve(true)
+        },
+        error: (err) => {
+          resolve(false);
+        }
+      });
+    });
+  }
+
+  changeCredentials(request: ChangeCredentialsRequest): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.http.patch(this.url + "/credentials", request).subscribe({
         next: () => {
           resolve(true)
         },

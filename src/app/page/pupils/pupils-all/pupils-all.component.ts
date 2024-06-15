@@ -76,6 +76,7 @@ export class PupilsAllComponent implements OnInit {
   hasNext: boolean = false;
   currentPage: number = 0;
   startWith: FormControl = new FormControl('');
+  user?: UserResponse;
 
   constructor(
     private userService: UserService,
@@ -85,6 +86,10 @@ export class PupilsAllComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPupils();
+    this.userService.getUserByToken().then(user => {
+      if (user == null) return;
+      this.user = user;
+    });
   }
 
   reloadPages() {

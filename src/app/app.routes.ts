@@ -21,9 +21,11 @@ import {SubjectOverviewMainComponent} from "./page/subjects/subject-overview/sub
 import {
   SubjectOverviewPupilsComponent
 } from "./page/subjects/subject-overview/subject-overview-pupils/subject-overview-pupils.component";
+import {CredentialsComponent} from "./page/credentials/credentials.component";
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'credentials', component: CredentialsComponent},
   {
     path: 'dashboard', component: DashboardComponent, children: [
       {path: '', component: MainComponent},

@@ -29,6 +29,12 @@ export class RedirectService {
                         console.debug('User is not enabled. Redirect to pending page (redirect service)');
                         resolve(true);
                     })
+                }
+                if (response.firstLogin === true) {
+                    this.router.navigate(['credentials']).then(() => {
+                        console.debug('User password is expired. Redirect to change credentials page (redirect service)');
+                        resolve(true);
+                    })
                 } else resolve(true);
             })
         });

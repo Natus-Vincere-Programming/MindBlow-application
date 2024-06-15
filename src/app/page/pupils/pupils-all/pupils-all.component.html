@@ -15,7 +15,7 @@
         <input type="text" matInput (blur)="reloadPages()" [formControl]="startWith">
         <mat-icon matSuffix>mode_edit</mat-icon>
       </mat-form-field>
-      <button mat-icon-button>
+      <button mat-icon-button *ngIf="this.user?.role === 'ADMIN'">
         <mat-icon>person_add</mat-icon>
       </button>
     </div>
@@ -35,11 +35,11 @@
             <mat-icon>mail</mat-icon>
             <span>Написати лист учню</span>
           </button>
-          <button mat-menu-item (click)="openDialog(pupil.id)">
+          <button mat-menu-item (click)="openDialog(pupil.id)" *ngIf="this.user?.role === 'ADMIN'">
             <mat-icon>person_remove</mat-icon>
             <span>Вилучити</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item disabled *ngIf="this.user?.role === 'ADMIN'">
             <mat-icon>person_apron</mat-icon>
             <span>Зробити викладачем</span>
           </button>

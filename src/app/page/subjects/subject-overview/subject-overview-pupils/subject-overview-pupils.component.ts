@@ -49,16 +49,22 @@ import {AddPupilDialogComponent} from "./add-pupil-dialog/add-pupil-dialog.compo
 })
 export class SubjectOverviewPupilsComponent {
   pupils: UserResponse[] = [];
+  user?: UserResponse;
 
   constructor(
     private subjectService: SubjectService,
     public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
+    private userService: UserService
   ) {
   }
 
   ngOnInit(): void {
     this.getStudents();
+    this.userService.getUserByToken().then(user => {
+      if (user == null) return;
+      this.user = user;
+    });
   }
 
   private getStudents() {

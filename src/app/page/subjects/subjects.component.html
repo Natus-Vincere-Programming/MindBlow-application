@@ -1,7 +1,7 @@
 <div class="subjects-container">
   <div class="subjects-header">
     <h4>Предмети</h4>
-    <button mat-flat-button (click)="openDialog()">
+    <button mat-flat-button (click)="openDialog()" *ngIf="this.user?.role !== 'STUDENT'">
       Створити предмет
       <mat-icon>add_circle</mat-icon>
     </button>
@@ -29,7 +29,7 @@
           <button mat-button [routerLink]="subject.id">
             Відкрити
           </button>
-          <button mat-icon-button disabled>
+          <button mat-icon-button disabled *ngIf="this.user?.role !== 'STUDENT'">
             <mat-icon>edit</mat-icon>
           </button>
         </mat-card-actions>
